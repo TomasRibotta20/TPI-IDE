@@ -1,0 +1,936 @@
+@page "/docentes-cursos"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject DocenteCursoService DocenteCursoService
+@inject CursoService CursoService
+@inject ProfesorService ProfesorService
+@inject NavigationManager Navigation
+@inject AuthenticationService AuthService
+
+<PageTitle>Gestión de Docentes por Curso</PageTitle>
+
+<div class="page-container">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <button class="btn-back" @onclick="GoBack">
+                Volver al Dashboard
+            </button>
+            <h1>Gestión de Docentes por Curso</h1>
+            <button class="btn-primary" @onclick="AbrirModalNuevo">
+                + Nueva Asignación
+            </button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-content">
+        @if (errorMessage != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Error:</strong> @errorMessage
+            </div>
+        }
+
+        <!-- Filtros -->
+        <div class="filtros-panel">
+            <div class="filtro-item">
+                <label>Filtrar por Curso:</label>
+                <select class="form-select" @onchange="FiltrarPorCurso">
+                    <option value="0">-- Todos los cursos --</option>
+                    @foreach (var curso in cursos)
+                    {
+                        <option value="@curso.IdCurso">@curso.NombreMateria - @curso.DescComision (@curso.AnioCalendario)</option>
+                    }
+                </select>
+            </div>
+            <button class="btn-secondary" @onclick="MostrarTodos">Mostrar Todos</button>
+        </div>
+
+        @if (isLoading)
+        {
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <p>Cargando asignaciones...</p>
+            </div>
+        }
+        else if (!asignacionesFiltradas.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-icon">DC</div>
+                <h2>No hay asignaciones registradas</h2>
+                <p>Comience asignando profesores a cursos</p>
+                <button class="btn-primary" @onclick="AbrirModalNuevo">
+                    <span class="icon">+</span> Crear Primera Asignación
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Docente</th>
+                            <th>Cargo</th>
+                            <th>Curso - Comisión (Año)</th>
+                            <th class="actions-column">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var asignacion in asignacionesFiltradas)
+                        {
+                            <tr>
+                                <td><strong>@asignacion.IdDictado</strong></td>
+                                <td>@asignacion.NombreCompleto</td>
+                                <td><span class="badge badge-@ObtenerColorCargo(asignacion.Cargo)">@asignacion.CargoDescripcion</span></td>
+                                <td>@asignacion.DescripcionCurso</td>
+                                <td class="actions-column">
+                                    <button class="btn-action btn-edit" @onclick="() => AbrirModalEditar(asignacion)" title="Editar">
+                                        Editar
+                                    </button>
+                                    <button class="btn-action btn-delete" @onclick="() => AbrirModalEliminar(asignacion)" title="Eliminar">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal Crear/Editar -->
+@if (mostrarModal)
+{
+    <div class="modal-overlay" @onclick="CerrarModal">
+        <div class="modal-content modal-wide" @onclick:stopPropagation="true">
+            <div class="modal-header">
+                <h2>@(asignacionSeleccionada == null ? "Nueva Asignación" : "Editar Asignación")</h2>
+                <button class="btn-close" @onclick="CerrarModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Curso *</label>
+                            <select class="form-control" @bind="cursoSeleccionadoId" required>
+                                <option value="0">-- Seleccione un curso --</option>
+                                @foreach (var curso in cursos.OrderBy(c => c.NombreMateria))
+                                {
+                                    <option value="@curso.IdCurso">@curso.NombreMateria - @curso.DescComision (@curso.AnioCalendario)</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Profesor *</label>
+                            <select class="form-control" @bind="profesorSeleccionadoId" required>
+                                <option value="0">-- Seleccione un profesor --</option>
+                                @foreach (var profesor in profesores.OrderBy(p => p.Apellido).ThenBy(p => p.Nombre))
+                                {
+                                    <option value="@profesor.Id">@profesor.Apellido, @profesor.Nombre (Legajo: @profesor.Legajo)</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cargo *</label>
+                            <select class="form-control" @bind="cargoSeleccionado" required>
+                                <option value="@TipoCargoDto.JefeDeCatedra">Jefe de Cátedra</option>
+                                <option value="@TipoCargoDto.Titular">Titular</option>
+                                <option value="@TipoCargoDto.Auxiliar">Auxiliar</option>
+                            </select>
+                        </div>
+
+                        <div class="info-panel">
+                            <p><strong>Los cargos disponibles son:</strong></p>
+                            <ul>
+                                <li><strong>Jefe de Cátedra:</strong> Responsable principal de la materia</li>
+                                <li><strong>Titular:</strong> Profesor titular del curso</li>
+                                <li><strong>Auxiliar:</strong> Profesor auxiliar o ayudante</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" @onclick="CerrarModal">Cancelar</button>
+                <button class="btn-primary" @onclick="GuardarAsignacion" disabled="@isSaving">
+                    @(isSaving ? "Guardando..." : "Guardar")
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal Confirmación Eliminar -->
+@if (mostrarModalEliminar)
+{
+    <div class="modal-overlay" @onclick="CerrarModalEliminar">
+        <div class="modal-content confirm-modal" @onclick:stopPropagation="true">
+            <div class="modal-header">
+                <h2>Confirmar Eliminación</h2>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de que desea eliminar la asignación de <strong>@asignacionAEliminar?.NombreCompleto</strong> como
+                    <strong>@asignacionAEliminar?.CargoDescripcion</strong> en <strong>@asignacionAEliminar?.DescripcionCurso</strong>?
+                </p>
+                <p class="warning-text">Esta acción no se puede deshacer.</p>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" @onclick="CerrarModalEliminar">Cancelar</button>
+                    <button class="btn-danger" @onclick="ConfirmarEliminar" disabled="@isDeleting">
+                        @(isDeleting ? "Eliminando..." : "Eliminar")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<DocenteCursoDto> asignaciones = new();
+    private List<DocenteCursoDto> asignacionesFiltradas = new();
+    private List<CursoDto> cursos = new();
+    private List<PersonaDto> profesores = new();
+    private DocenteCursoDto? asignacionSeleccionada;
+    private DocenteCursoDto? asignacionAEliminar;
+    private bool mostrarModal = false;
+    private bool mostrarModalEliminar = false;
+    private bool isLoading = true;
+    private bool isSaving = false;
+    private bool isDeleting = false;
+    private string? errorMessage;
+
+    // Campos del formulario
+    private int cursoSeleccionadoId = 0;
+    private int profesorSeleccionadoId = 0;
+    private TipoCargoDto cargoSeleccionado = TipoCargoDto.Titular;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = await AuthService.GetCurrentUserAsync();
+        if (user == null)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        await CargarDatos();
+    }
+
+    private async Task CargarDatos()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            // Cargar cursos
+            var cursosResult = await CursoService.GetAllAsync();
+            cursos = cursosResult.ToList();
+
+            // Cargar profesores
+            var profesoresResult = await ProfesorService.GetAllAsync();
+            profesores = profesoresResult.Where(p => p.TipoPersona == TipoPersonaDto.Profesor).ToList();
+
+            // Cargar asignaciones
+            var asignacionesResult = await DocenteCursoService.GetAllAsync();
+            asignaciones = asignacionesResult.ToList();
+            asignacionesFiltradas = asignaciones;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos: {ex.Message}";
+            Console.WriteLine($"Error en CargarDatos: {ex}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task FiltrarPorCurso(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int cursoId))
+        {
+            if (cursoId == 0)
+            {
+                asignacionesFiltradas = asignaciones;
+            }
+            else
+            {
+                try
+                {
+                    var asignacionesResult = await DocenteCursoService.GetByCursoAsync(cursoId);
+                    asignacionesFiltradas = asignacionesResult.ToList();
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = $"Error al filtrar: {ex.Message}";
+                }
+            }
+        }
+    }
+
+    private async Task MostrarTodos()
+    {
+        await CargarDatos();
+    }
+
+    private void AbrirModalNuevo()
+    {
+        asignacionSeleccionada = null;
+        cursoSeleccionadoId = 0;
+        profesorSeleccionadoId = 0;
+        cargoSeleccionado = TipoCargoDto.Titular;
+        mostrarModal = true;
+    }
+
+    private void AbrirModalEditar(DocenteCursoDto asignacion)
+    {
+        asignacionSeleccionada = asignacion;
+        cursoSeleccionadoId = asignacion.IdCurso;
+        profesorSeleccionadoId = asignacion.IdDocente;
+        cargoSeleccionado = asignacion.Cargo;
+        mostrarModal = true;
+    }
+
+    private void CerrarModal()
+    {
+        mostrarModal = false;
+        asignacionSeleccionada = null;
+    }
+
+    private async Task GuardarAsignacion()
+    {
+        try
+        {
+            // Validaciones
+            if (cursoSeleccionadoId == 0)
+            {
+                errorMessage = "Debe seleccionar un curso";
+                return;
+            }
+
+            if (profesorSeleccionadoId == 0)
+            {
+                errorMessage = "Debe seleccionar un profesor";
+                return;
+            }
+
+            isSaving = true;
+            errorMessage = null;
+
+            var dto = new DocenteCursoCreateDto
+            {
+                IdCurso = cursoSeleccionadoId,
+                IdDocente = profesorSeleccionadoId,
+                Cargo = cargoSeleccionado
+            };
+
+            bool success = false; // Declarada aquí para que esté en el ámbito
+            if (asignacionSeleccionada == null)
+            {
+                var result = await DocenteCursoService.CreateAsync(dto);
+                if (result.success)
+                {
+                    success = true; // Marcar éxito
+                }
+                else
+                {
+                    errorMessage = result.message;
+                    isSaving = false; // Detener guardado
+                    return; // Salir
+                }
+            }
+            else
+            {
+                var updateSuccess = await DocenteCursoService.UpdateAsync(asignacionSeleccionada.IdDictado, dto);
+                if (updateSuccess)
+                {
+                    success = true; // Marcar éxito
+                }
+                else
+                {
+                    errorMessage = "Error al actualizar la asignación";
+                    isSaving = false; // Detener guardado
+                    return; // Salir
+                }
+            }
+
+            if (success)
+            {
+                await CargarDatos();
+                CerrarModal();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+            Console.WriteLine($"Error en GuardarAsignacion: {ex}");
+        }
+        finally
+        {
+            isSaving = false;
+        }
+    }
+
+    private void AbrirModalEliminar(DocenteCursoDto asignacion)
+    {
+        asignacionAEliminar = asignacion;
+        mostrarModalEliminar = true;
+    }
+
+    private void CerrarModalEliminar()
+    {
+        mostrarModalEliminar = false;
+        asignacionAEliminar = null;
+    }
+
+    private async Task ConfirmarEliminar()
+    {
+        if (asignacionAEliminar == null) return;
+
+        try
+        {
+            isDeleting = true;
+            errorMessage = null;
+
+            var success = await DocenteCursoService.DeleteAsync(asignacionAEliminar.IdDictado);
+
+            if (success)
+            {
+                await CargarDatos();
+                CerrarModalEliminar();
+            }
+            else
+            {
+                errorMessage = "Error al eliminar la asignación";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+            Console.WriteLine($"Error en ConfirmarEliminar: {ex}");
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private string ObtenerColorCargo(TipoCargoDto cargo)
+    {
+        return cargo switch
+        {
+            TipoCargoDto.JefeDeCatedra => "primary",
+            TipoCargoDto.Titular => "success",
+            TipoCargoDto.Auxiliar => "warning",
+            _ => "secondary"
+        };
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/dashboard");
+    }
+}
+
+<style>
+    .page-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .btn-back {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover {
+        background: white;
+        color: #667eea;
+        transform: translateX(-5px);
+    }
+
+    .btn-primary {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .page-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .alert {
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .filtros-panel {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .filtro-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filtro-item label {
+        font-weight: 600;
+        white-space: nowrap;
+        color: #495057;
+    }
+
+    .form-select {
+        flex: 1;
+        padding: 10px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .form-select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+        background: white;
+        border-radius: 15px;
+        padding: 60px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .empty-state h2 {
+        color: #495057;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .data-table th {
+        padding: 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+        padding: 20px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s;
+    }
+
+    .data-table tbody tr:hover {
+        background: #f8f9fa;
+        transform: scale(1.01);
+    }
+
+    .actions-column {
+        text-align: center;
+        width: 200px;
+    }
+
+    .btn-action {
+        background: #667eea;
+        color: white;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        padding: 8px 12px;
+        margin: 0 5px;
+        border-radius: 8px;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
+
+    .btn-edit:hover {
+        background: #5568d3;
+        transform: scale(1.05);
+    }
+
+    .btn-delete {
+        background: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background: #c82333;
+        transform: scale(1.05);
+    }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .badge-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .badge-success {
+        background: #28a745;
+        color: white;
+    }
+
+    .badge-warning {
+        background: #ffc107;
+        color: #212529;
+    }
+
+    .badge-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 500px;
+        animation: slideUp 0.3s;
+    }
+
+    .modal-wide {
+        max-width: 800px;
+    }
+
+    .confirm-modal {
+        max-width: 400px;
+    }
+
+    @@keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .modal-header {
+        padding: 25px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #495057;
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .btn-close:hover {
+        background: #f8f9fa;
+        color: #495057;
+    }
+
+    .modal-body {
+        padding: 30px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    @@media (max-width: 768px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .info-panel {
+        grid-column: 1 / -1;
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #667eea;
+    }
+
+    .info-panel p {
+        margin: 0 0 10px 0;
+        color: #495057;
+    }
+
+    .info-panel ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .info-panel li {
+        margin: 5px 0;
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .info-panel strong {
+        color: #495057;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .warning-text {
+        color: #dc3545;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .icon {
+        font-style: normal;
+    }
+</style>

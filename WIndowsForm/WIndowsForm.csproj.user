@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="EditarComisionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditarCondicionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditarCursoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditarEspecialidadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditarMateriaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditarPlanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditarUsuarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormAsignarProfesores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormCargarNotasProfesor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormComisiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormCursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormEditarDocenteCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormEspecialidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormGestionarDocentesCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormInscripcionAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormInscripciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormMaterias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormMisCursosAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormMisCursosProfesor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormPlanes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormReporteCursos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormReportePlanes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormSeleccionReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuProfesor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

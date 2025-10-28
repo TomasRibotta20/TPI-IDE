@@ -1,0 +1,878 @@
+@page "/inscripciones"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject InscripcionService InscripcionService
+@inject AlumnoService AlumnoService
+@inject CursoService CursoService
+@inject NavigationManager Navigation
+
+<PageTitle>Inscripciones - Academia</PageTitle>
+
+<div class="page-container">
+    <div class="page-header">
+        <div class="header-content">
+            <button class="btn-back" @onclick="GoBack">
+                Volver al Dashboard
+            </button>
+            <h1>Gestión de Inscripciones</h1>
+            <button class="btn-primary" @onclick="OpenCreateDialog">
+                + Nueva Inscripción
+            </button>
+        </div>
+    </div>
+
+    <div class="page-content">
+        @if (isLoading)
+        {
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <p>Cargando inscripciones...</p>
+            </div>
+        }
+        else if (!inscripciones.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-icon">IN</div>
+                <h2>No hay inscripciones registradas</h2>
+                <p>Comienza inscribiendo alumnos a cursos</p>
+                <button class="btn-primary" @onclick="OpenCreateDialog">
+                    + Nueva Inscripción
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="stats-grid">
+                <div class="stat-card total">
+                    <div class="stat-value">@inscripciones.Count</div>
+                    <div class="stat-label">Total Inscripciones</div>
+                </div>
+                <div class="stat-card promocional">
+                    <div class="stat-value">@inscripciones.Count(i => i.Condicion == CondicionAlumnoDto.Promocional)</div>
+                    <div class="stat-label">Promocionales</div>
+                </div>
+                <div class="stat-card regular">
+                    <div class="stat-value">@inscripciones.Count(i => i.Condicion == CondicionAlumnoDto.Regular)</div>
+                    <div class="stat-label">Regulares</div>
+                </div>
+                <div class="stat-card libre">
+                    <div class="stat-value">@inscripciones.Count(i => i.Condicion == CondicionAlumnoDto.Libre)</div>
+                    <div class="stat-label">Libres</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Legajo</th>
+                            <th>Alumno</th>
+                            <th>Curso</th>
+                            <th>Año</th>
+                            <th>Condición</th>
+                            <th>Nota</th>
+                            <th class="actions-column">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var inscripcion in inscripciones)
+                        {
+                            <tr>
+                                <td>@inscripcion.IdInscripcion</td>
+                                <td><strong>@inscripcion.LegajoAlumno</strong></td>
+                                <td>@inscripcion.ApellidoAlumno, @inscripcion.NombreAlumno</td>
+                                <td>@inscripcion.NombreMateria - @inscripcion.DescComision</td>
+                                <td>@inscripcion.AnioCalendario</td>
+                                <td>
+                                    <span class="badge @GetCondicionBadge(inscripcion.Condicion)">
+                                        @inscripcion.Condicion
+                                    </span>
+                                </td>
+                                <td>@(inscripcion.Condicion == CondicionAlumnoDto.Promocional && inscripcion.Nota.HasValue ? inscripcion.Nota.ToString() : "-")</td>
+                                <td class="actions-column">
+                                    <button class="btn-action btn-edit" @onclick="() => OpenEditDialog(inscripcion)" title="Editar">
+                                        Editar
+                                    </button>
+                                    <button class="btn-action btn-delete" @onclick="() => DeleteInscripcion(inscripcion)" title="Eliminar">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@if (showDialog)
+{
+    <div class="modal-overlay" @onclick="CloseDialog">
+        <div class="modal-content" @onclick:stopPropagation>
+            <div class="modal-header">
+                <h2>@(isEditMode ? "Editar Inscripción" : "Nueva Inscripción")</h2>
+                <button class="btn-close" @onclick="CloseDialog">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <EditForm Model="@currentInscripcion" OnValidSubmit="HandleSave">
+                    @if (!isEditMode)
+                    {
+                        <div class="form-group">
+                            <label for="alumno">Alumno *</label>
+                            <InputSelect id="alumno" class="form-control" @bind-Value="currentInscripcion.IdAlumno">
+                                <option value="0">-- Seleccione un alumno --</option>
+                                @foreach (var alumno in alumnos)
+                                {
+                                    <option value="@alumno.Id">[@alumno.Legajo] @alumno.Apellido, @alumno.Nombre</option>
+                                }
+                            </InputSelect>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="curso">Curso *</label>
+                            <InputSelect id="curso" class="form-control" @bind-Value="currentInscripcion.IdCurso">
+                                <option value="0">-- Seleccione un curso --</option>
+                                @foreach (var curso in cursos)
+                                {
+                                    <option value="@curso.IdCurso">@curso.NombreMateria - @curso.DescComision (@curso.AnioCalendario)</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="info-panel">
+                            <p><strong>Alumno:</strong> @currentInscripcion.ApellidoAlumno, @currentInscripcion.NombreAlumno</p>
+                            <p><strong>Curso:</strong> @currentInscripcion.NombreMateria - @currentInscripcion.DescComision</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="condicion">Condición *</label>
+                            <InputSelect id="condicion" class="form-control" @bind-Value="currentInscripcion.Condicion">
+                                <option value="@CondicionAlumnoDto.Libre">Libre</option>
+                                <option value="@CondicionAlumnoDto.Regular">Regular</option>
+                                <option value="@CondicionAlumnoDto.Promocional">Promocional</option>
+                            </InputSelect>
+                        </div>
+
+                        @if (currentInscripcion.Condicion == CondicionAlumnoDto.Promocional)
+                        {
+                            <div class="form-group">
+                                <label for="nota">Nota *</label>
+                                <InputNumber id="nota" class="form-control" @bind-Value="currentInscripcion.Nota" min="7" max="10" placeholder="Ingrese la nota (7-10)" />
+                                <small class="form-text">Solo se pueden cargar notas para condicion Promocional</small>
+                            </div>
+                        }
+                    }
+
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            @errorMessage
+                        </div>
+                    }
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" @onclick="CloseDialog">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-primary" disabled="@isSaving">
+                            @(isSaving ? "Guardando..." : "Guardar")
+                        </button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showConfirmDialog)
+{
+    <div class="modal-overlay" @onclick="CloseConfirmDialog">
+        <div class="modal-content confirm-modal" @onclick:stopPropagation>
+            <div class="modal-header">
+                <h2>Confirmar Eliminación</h2>
+            </div>
+            
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta inscripción?</p>
+                <p class="warning-text">Esta acción no se puede deshacer.</p>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" @onclick="CloseConfirmDialog">
+                        Cancelar
+                    </button>
+                    <button class="btn-danger" @onclick="ConfirmDelete" disabled="@isDeleting">
+                        @(isDeleting ? "Eliminando..." : "Eliminar")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .page-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .btn-back {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover {
+        background: white;
+        color: #667eea;
+    }
+
+    .btn-primary {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .page-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+        background: white;
+        border-radius: 15px;
+        padding: 60px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .empty-state h2 {
+        color: #495057;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: all 0.3s;
+        border-left: 4px solid;
+    }
+
+    .stat-card.total { border-color: #667eea; }
+    .stat-card.promocional { border-color: #2ecc71; }
+    .stat-card.regular { border-color: #3498db; }
+    .stat-card.libre { border-color: #e74c3c; }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-value {
+        font-size: 36px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .data-table th {
+        padding: 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .data-table td {
+        padding: 20px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s;
+    }
+
+    .data-table tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+    .actions-column {
+        text-align: center;
+        width: 200px;
+    }
+
+    .btn-action {
+        background: #667eea;
+        color: white;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        padding: 8px 12px;
+        margin: 0 5px;
+        border-radius: 8px;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
+
+    .btn-edit:hover {
+        background: #5568d3;
+        transform: scale(1.05);
+    }
+
+    .btn-delete {
+        background: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background: #c82333;
+        transform: scale(1.05);
+    }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .badge-promocional {
+        background: #2ecc71;
+        color: white;
+    }
+
+    .badge-regular {
+        background: #3498db;
+        color: white;
+    }
+
+    .badge-libre {
+        background: #e74c3c;
+        color: white;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 500px;
+        animation: slideUp 0.3s;
+    }
+
+    .confirm-modal {
+        max-width: 400px;
+    }
+
+    @@keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-header {
+        padding: 25px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #495057;
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .btn-close:hover {
+        background: #f8f9fa;
+        color: #495057;
+    }
+
+    .modal-body {
+        padding: 30px;
+    }
+
+    .info-panel {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .info-panel p {
+        margin: 5px 0;
+        color: #495057;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+        margin-top: 25px;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .alert {
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .warning-text {
+        color: #dc3545;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .form-text {
+        color: #6c757d;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+    }
+</style>
+
+@code {
+    private List<AlumnoCursoDto> inscripciones = new();
+    private List<PersonaDto> alumnos = new();
+    private List<CursoDto> cursos = new();
+    private AlumnoCursoDto currentInscripcion = new();
+    private AlumnoCursoDto? inscripcionToDelete;
+    
+    private bool isLoading = true;
+    private bool showDialog = false;
+    private bool showConfirmDialog = false;
+    private bool isEditMode = false;
+    private bool isSaving = false;
+    private bool isDeleting = false;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        try
+        {
+            var inscripcionesTask = InscripcionService.GetAllAsync();
+            var alumnosTask = AlumnoService.GetAllAsync();
+            var cursosTask = CursoService.GetAllAsync();
+            
+            await Task.WhenAll(inscripcionesTask, alumnosTask, cursosTask);
+            
+            inscripciones = (await inscripcionesTask).ToList();
+            alumnos = (await alumnosTask).ToList();
+            cursos = (await cursosTask).ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void OpenCreateDialog()
+    {
+        isEditMode = false;
+        currentInscripcion = new AlumnoCursoDto();
+        errorMessage = string.Empty;
+        showDialog = true;
+    }
+
+    private void OpenEditDialog(AlumnoCursoDto inscripcion)
+    {
+        isEditMode = true;
+        currentInscripcion = new AlumnoCursoDto
+        {
+            IdInscripcion = inscripcion.IdInscripcion,
+            IdAlumno = inscripcion.IdAlumno,
+            IdCurso = inscripcion.IdCurso,
+            Condicion = inscripcion.Condicion,
+            Nota = inscripcion.Condicion == CondicionAlumnoDto.Promocional ? inscripcion.Nota : null,
+            NombreAlumno = inscripcion.NombreAlumno,
+            ApellidoAlumno = inscripcion.ApellidoAlumno,
+            NombreMateria = inscripcion.NombreMateria,
+            DescComision = inscripcion.DescComision
+        };
+        errorMessage = string.Empty;
+        showDialog = true;
+    }
+
+    private void CloseDialog()
+    {
+        showDialog = false;
+        errorMessage = string.Empty;
+    }
+
+    private async Task HandleSave()
+    {
+        if (!isEditMode)
+        {
+            if (currentInscripcion.IdAlumno <= 0)
+            {
+                errorMessage = "Debe seleccionar un alumno";
+                return;
+            }
+
+            if (currentInscripcion.IdCurso <= 0)
+            {
+                errorMessage = "Debe seleccionar un curso";
+                return;
+            }
+        }
+
+        isSaving = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            // Validar notas solo para Promocional
+            if (isEditMode && currentInscripcion.Condicion == CondicionAlumnoDto.Promocional)
+            {
+                if (!currentInscripcion.Nota.HasValue)
+                {
+                    errorMessage = "La nota es obligatoria para condicion Promocional";
+                    return;
+                }
+                if (currentInscripcion.Nota < 7 || currentInscripcion.Nota > 10)
+                {
+                    errorMessage = "La nota para Promocional debe estar entre 7 y 10";
+                    return;
+                }
+            }
+            else if (isEditMode && currentInscripcion.Condicion != CondicionAlumnoDto.Promocional)
+            {
+                currentInscripcion.Nota = null;
+            }
+
+            bool success;
+            if (isEditMode)
+            {
+                success = await InscripcionService.ActualizarCondicionAsync(
+                    currentInscripcion.IdInscripcion,
+                    currentInscripcion.Condicion,
+                    currentInscripcion.Nota
+                );
+            }
+            else
+            {
+                var result = await InscripcionService.InscribirAsync(currentInscripcion.IdAlumno, currentInscripcion.IdCurso);
+                success = result.success;
+                if (!success)
+                {
+                    errorMessage = result.message;
+                }
+            }
+
+            if (success)
+            {
+                await LoadData();
+                CloseDialog();
+            }
+            else if (string.IsNullOrEmpty(errorMessage))
+            {
+                errorMessage = "Error al guardar la inscripción";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isSaving = false;
+        }
+    }
+
+    private void DeleteInscripcion(AlumnoCursoDto inscripcion)
+    {
+        inscripcionToDelete = inscripcion;
+        showConfirmDialog = true;
+    }
+
+    private void CloseConfirmDialog()
+    {
+        showConfirmDialog = false;
+        inscripcionToDelete = null;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        if (inscripcionToDelete == null) return;
+
+        isDeleting = true;
+        try
+        {
+            var success = await InscripcionService.DesinscribirAsync(inscripcionToDelete.IdInscripcion);
+            if (success)
+            {
+                await LoadData();
+                CloseConfirmDialog();
+            }
+            else
+            {
+                errorMessage = "Error al eliminar la inscripción";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private string GetCondicionBadge(CondicionAlumnoDto condicion)
+    {
+        return condicion switch
+        {
+            CondicionAlumnoDto.Promocional => "badge-promocional",
+            CondicionAlumnoDto.Regular => "badge-regular",
+            CondicionAlumnoDto.Libre => "badge-libre",
+            _ => ""
+        };
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/dashboard");
+    }
+}

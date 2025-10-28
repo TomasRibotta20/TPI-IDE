@@ -1,0 +1,210 @@
+@page "/alumno/dashboard"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject AuthenticationService AuthService
+@inject NavigationManager Navigation
+
+<PageTitle>Panel del Alumno</PageTitle>
+
+<div class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1>Panel del Alumno</h1>
+            <div class="user-info">
+                <span class="welcome-text">Bienvenido, <strong>@currentUser?.Username</strong></span>
+                <button class="btn-logout" @onclick="HandleLogout">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+        <div class="menu-grid">
+            <!-- Ver Mis Cursos -->
+            <div class="menu-card" @onclick='() => Navigation.NavigateTo("/alumno/mis-cursos")'>
+                <div class="card-icon">MC</div>
+                <h3>Mis Cursos</h3>
+                <p>Ver cursos e inscripciones</p>
+            </div>
+
+            <!-- Inscribirse a Cursos -->
+            <div class="menu-card" @onclick='() => Navigation.NavigateTo("/alumno/inscripcion")'>
+                <div class="card-icon">IN</div>
+                <h3>Inscribirme</h3>
+                <p>Inscribirse a nuevos cursos</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .dashboard-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .dashboard-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .welcome-text {
+        font-size: 16px;
+    }
+
+    .btn-logout {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-logout:hover {
+        background: white;
+        color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    .dashboard-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .menu-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        border: 2px solid transparent;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+    }
+
+    .card-icon {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        background: #667eea;
+        color: white;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        letter-spacing: 2px;
+    }
+
+    .menu-card h3 {
+        margin: 15px 0 10px;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .menu-card p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .icon {
+        font-style: normal;
+    }
+</style>
+
+@code {
+    private LoginResponse? currentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        
+        if (currentUser == null)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        // Verificar que sea alumno
+        if (currentUser.TipoUsuario != "Alumno")
+        {
+            // Si no es alumno, redirigir según su rol
+            if (currentUser.TipoUsuario == "Administrador")
+            {
+                Navigation.NavigateTo("/dashboard");
+            }
+            else if (currentUser.TipoUsuario == "Profesor")
+            {
+                Navigation.NavigateTo("/profesor/dashboard");
+            }
+            else
+            {
+                Navigation.NavigateTo("/login");
+            }
+        }
+    }
+
+    private async Task HandleLogout()
+    {
+        await AuthService.LogoutAsync();
+        Navigation.NavigateTo("/login");
+    }
+}

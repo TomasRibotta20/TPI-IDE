@@ -1,0 +1,884 @@
+@page "/alumno/inscripcion"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject CursoService CursoService
+@inject InscripcionService InscripcionService
+@inject AuthenticationService AuthService
+@inject NavigationManager Navigation
+
+<PageTitle>Inscripción a Cursos - Alumno</PageTitle>
+
+<div class="page-container">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <button class="btn-back" @onclick="GoBack">
+                Volver al Dashboard
+            </button>
+            <h1>Inscripción a Cursos</h1>
+            <button class="btn-primary" @onclick="LoadData">
+                Actualizar
+            </button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-content">
+        @if (isLoading)
+        {
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <p>Cargando cursos disponibles...</p>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="empty-state">
+                <div class="empty-icon">!</div>
+                <h2>Error al cargar</h2>
+                <p>@errorMessage</p>
+                <button class="btn-primary" @onclick="LoadData">
+                    Reintentar
+                </button>
+            </div>
+        }
+        else if (!cursosDisponibles.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-icon">CU</div>
+                <h2>No hay cursos disponibles</h2>
+                <p>No hay cursos disponibles para inscripción en este momento</p>
+            </div>
+        }
+        else
+        {
+            <!-- Filtros -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label>Buscar:</label>
+                    <input type="text" class="form-control" @bind="busqueda" @bind:event="oninput" placeholder="Buscar por materia, comisión o año..." />
+                </div>
+                <div class="filter-group">
+                    <label>Año:</label>
+                    <select class="form-control" @bind="anioFiltro">
+                        <option value="0">Todos los años</option>
+                        @foreach (var anio in cursosDisponibles.Select(c => c.AnioCalendario).Distinct().OrderBy(a => a))
+                        {
+                            <option value="@anio">@anio</option>
+                        }
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Disponibilidad:</label>
+                    <select class="form-control" @bind="disponibilidadFiltro">
+                        <option value="todos">Todos</option>
+                        <option value="disponible">Con cupo</option>
+                        <option value="completo">Sin cupo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Cursos Cards -->
+            <div class="cursos-grid">
+                @foreach (var curso in CursosFiltrados())
+                {
+                    var cupoDisponible = curso.Cupo - (curso.InscriptosActuales ?? 0);
+                    var yaInscripto = misInscripciones.Any(i => i.IdCurso == curso.IdCurso);
+
+                    <div class="curso-card @GetCursoCardClass(cupoDisponible, yaInscripto)">
+                        <div class="curso-header">
+                            <div class="curso-title">
+                                <h3>@curso.NombreMateria</h3>
+                                <p class="curso-subtitle">@curso.DescComision</p>
+                            </div>
+                            @if (yaInscripto)
+                            {
+                                <span class="badge badge-inscripto">Inscripto</span>
+                            }
+                            else if (cupoDisponible <= 0)
+                            {
+                                <span class="badge badge-completo">Sin Cupo</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-disponible">Disponible</span>
+                            }
+                        </div>
+
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <span class="info-label">Año:</span>
+                                <span class="info-value">@curso.AnioCalendario</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Cupo:</span>
+                                <span class="info-value">@(curso.InscriptosActuales ?? 0) / @curso.Cupo</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Disponibles:</span>
+                                <span class="info-value @GetDisponibilidadClass(cupoDisponible)">@cupoDisponible</span>
+                            </div>
+                        </div>
+
+                        @if (!yaInscripto && cupoDisponible > 0)
+                        {
+                            <button class="btn-inscribir" @onclick="() => InscribirseACurso(curso)">
+                                Inscribirse
+                            </button>
+                        }
+                        else if (yaInscripto)
+                        {
+                            <button class="btn-inscripto" disabled>
+                                Ya Inscripto
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn-completo" disabled>
+                                Sin Cupo
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+
+            @if (!CursosFiltrados().Any())
+            {
+                <div class="empty-state">
+                    <div class="empty-icon">?</div>
+                    <h2>No se encontraron cursos</h2>
+                    <p>Intenta cambiar los filtros de búsqueda</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<!-- Confirm Dialog -->
+@if (showConfirmDialog && cursoAInscribir != null)
+{
+    <div class="modal-overlay" @onclick="CloseConfirmDialog">
+        <div class="modal-content" @onclick:stopPropagation>
+            <div class="modal-header">
+                <h2>Confirmar Inscripción</h2>
+                <button class="btn-close" @onclick="CloseConfirmDialog">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <p>¿Confirmas la inscripción al siguiente curso?</p>
+                
+                <div class="curso-confirm-info">
+                    <div class="confirm-item">
+                        <strong>Materia:</strong> @cursoAInscribir.NombreMateria
+                    </div>
+                    <div class="confirm-item">
+                        <strong>Comisión:</strong> @cursoAInscribir.DescComision
+                    </div>
+                    <div class="confirm-item">
+                        <strong>Año:</strong> @cursoAInscribir.AnioCalendario
+                    </div>
+                    <div class="confirm-item">
+                        <strong>Cupo disponible:</strong> @(cursoAInscribir.Cupo - (cursoAInscribir.InscriptosActuales ?? 0))
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(inscripcionMessage))
+                {
+                    <div class="@(inscripcionExitosa ? "alert alert-success" : "alert alert-danger")">
+                        @inscripcionMessage
+                    </div>
+                }
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" @onclick="CloseConfirmDialog" disabled="@isInscribing">
+                        Cancelar
+                    </button>
+                    <button class="btn-primary" @onclick="ConfirmInscripcion" disabled="@isInscribing">
+                        @(isInscribing ? "Inscribiendo..." : "Confirmar")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .page-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .btn-back {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover {
+        background: white;
+        color: #667eea;
+        transform: translateX(-5px);
+    }
+
+    .btn-primary {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .page-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+        background: white;
+        border-radius: 15px;
+        padding: 60px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+    }
+
+    .empty-state h2 {
+        color: #495057;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
+
+    .filters-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filter-group label {
+        font-weight: 600;
+        color: #495057;
+        font-size: 14px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .cursos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 25px;
+    }
+
+    .curso-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        border-left: 5px solid;
+    }
+
+    .curso-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .curso-card-disponible {
+        border-color: #2ecc71;
+    }
+
+    .curso-card-completo {
+        border-color: #e74c3c;
+        opacity: 0.7;
+    }
+
+    .curso-card-inscripto {
+        border-color: #3498db;
+        background: rgba(52, 152, 219, 0.05);
+    }
+
+    .curso-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+
+    .curso-title h3 {
+        margin: 0 0 5px 0;
+        color: #495057;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .curso-subtitle {
+        margin: 0;
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .badge-disponible {
+        background: #2ecc71;
+        color: white;
+    }
+
+    .badge-completo {
+        background: #e74c3c;
+        color: white;
+    }
+
+    .badge-inscripto {
+        background: #3498db;
+        color: white;
+    }
+
+    .curso-info {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .info-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-label {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .info-value {
+        font-weight: 600;
+        color: #495057;
+        font-size: 14px;
+    }
+
+    .disponibilidad-alta {
+        color: #2ecc71;
+    }
+
+    .disponibilidad-media {
+        color: #f39c12;
+    }
+
+    .disponibilidad-baja {
+        color: #e74c3c;
+    }
+
+    .btn-inscribir {
+        width: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-inscribir:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-inscripto,
+    .btn-completo {
+        width: 100%;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: not-allowed;
+    }
+
+    .btn-inscripto {
+        background: #3498db;
+        color: white;
+    }
+
+    .btn-completo {
+        background: #95a5a6;
+        color: white;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: slideUp 0.3s;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @@keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .modal-header {
+        padding: 25px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #495057;
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .btn-close:hover {
+        background: #f8f9fa;
+        color: #495057;
+    }
+
+    .modal-body {
+        padding: 30px;
+    }
+
+    .modal-body > p {
+        color: #495057;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .curso-confirm-info {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .confirm-item {
+        padding: 8px 0;
+        border-bottom: 1px solid #e9ecef;
+        color: #495057;
+    }
+
+    .confirm-item:last-child {
+        border-bottom: none;
+    }
+
+    .confirm-item strong {
+        color: #495057;
+        margin-right: 10px;
+    }
+
+    .alert {
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .icon {
+        font-style: normal;
+    }
+
+    @@media (max-width: 768px) {
+        .header-content {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .page-content {
+            padding: 20px;
+        }
+
+        .filters-section {
+            grid-template-columns: 1fr;
+        }
+
+        .cursos-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+@code {
+    private List<CursoDto> cursosDisponibles = new();
+    private List<AlumnoCursoDto> misInscripciones = new();
+    private CursoDto? cursoAInscribir;
+    
+    private bool isLoading = true;
+    private bool showConfirmDialog = false;
+    private bool isInscribing = false;
+    private bool inscripcionExitosa = false;
+    private string errorMessage = string.Empty;
+    private string inscripcionMessage = string.Empty;
+    private int? personaId;
+
+    private string busqueda = string.Empty;
+    private int anioFiltro = 0;
+    private string disponibilidadFiltro = "todos";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var isAuthenticated = await AuthService.IsAuthenticatedAsync();
+        if (!isAuthenticated)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        var user = await AuthService.GetCurrentUserAsync();
+        if (user?.TipoUsuario != "Alumno")
+        {
+            Navigation.NavigateTo("/dashboard");
+            return;
+        }
+
+        personaId = user.PersonaId;
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            // Cargar cursos disponibles
+            var cursosTask = CursoService.GetAllAsync();
+            
+            // Cargar mis inscripciones
+            Task<IEnumerable<AlumnoCursoDto>> inscripcionesTask;
+            if (personaId.HasValue)
+            {
+                inscripcionesTask = InscripcionService.GetByAlumnoAsync(personaId.Value);
+            }
+            else
+            {
+                inscripcionesTask = Task.FromResult(Enumerable.Empty<AlumnoCursoDto>());
+            }
+
+            await Task.WhenAll(cursosTask, inscripcionesTask);
+            
+            cursosDisponibles = (await cursosTask).ToList();
+            misInscripciones = (await inscripcionesTask).ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos: {ex.Message}";
+            Console.WriteLine(errorMessage);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private IEnumerable<CursoDto> CursosFiltrados()
+    {
+        var cursos = cursosDisponibles.AsEnumerable();
+
+        // Filtro de búsqueda
+        if (!string.IsNullOrWhiteSpace(busqueda))
+        {
+            var busquedaLower = busqueda.ToLower();
+            cursos = cursos.Where(c =>
+                c.NombreMateria?.ToLower().Contains(busquedaLower) == true ||
+                c.DescComision?.ToLower().Contains(busquedaLower) == true ||
+                c.AnioCalendario.ToString().Contains(busquedaLower));
+        }
+
+        // Filtro de año
+        if (anioFiltro > 0)
+        {
+            cursos = cursos.Where(c => c.AnioCalendario == anioFiltro);
+        }
+
+        // Filtro de disponibilidad
+        if (disponibilidadFiltro == "disponible")
+        {
+            cursos = cursos.Where(c => (c.Cupo - (c.InscriptosActuales ?? 0)) > 0);
+        }
+        else if (disponibilidadFiltro == "completo")
+        {
+            cursos = cursos.Where(c => (c.Cupo - (c.InscriptosActuales ?? 0)) <= 0);
+        }
+
+        return cursos.OrderBy(c => c.NombreMateria).ThenBy(c => c.DescComision);
+    }
+
+    private string GetCursoCardClass(int cupoDisponible, bool yaInscripto)
+    {
+        if (yaInscripto) return "curso-card-inscripto";
+        if (cupoDisponible <= 0) return "curso-card-completo";
+        return "curso-card-disponible";
+    }
+
+    private string GetDisponibilidadClass(int disponibles)
+    {
+        if (disponibles <= 0) return "disponibilidad-baja";
+        if (disponibles <= 5) return "disponibilidad-media";
+        return "disponibilidad-alta";
+    }
+
+    private void InscribirseACurso(CursoDto curso)
+    {
+        cursoAInscribir = curso;
+        inscripcionMessage = string.Empty;
+        inscripcionExitosa = false;
+        showConfirmDialog = true;
+    }
+
+    private void CloseConfirmDialog()
+    {
+        showConfirmDialog = false;
+        cursoAInscribir = null;
+        inscripcionMessage = string.Empty;
+        inscripcionExitosa = false;
+    }
+
+    private async Task ConfirmInscripcion()
+    {
+        if (cursoAInscribir == null || !personaId.HasValue) return;
+
+        isInscribing = true;
+        inscripcionMessage = string.Empty;
+
+        try
+        {
+            var (success, message) = await InscripcionService.InscribirAsync(personaId.Value, cursoAInscribir.IdCurso);
+            
+            inscripcionExitosa = success;
+            inscripcionMessage = message;
+
+            if (success)
+            {
+                // Esperar un momento para que el usuario vea el mensaje
+                await Task.Delay(1500);
+                
+                // Recargar datos
+                await LoadData();
+                
+                // Cerrar el diálogo
+                CloseConfirmDialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            inscripcionExitosa = false;
+            inscripcionMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isInscribing = false;
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/alumno/dashboard");
+    }
+}

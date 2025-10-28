@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "AcademiaAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\AcademiaBlazor\\AcademiaBlazor.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

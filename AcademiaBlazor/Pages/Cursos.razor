@@ -1,0 +1,694 @@
+@page "/cursos"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject CursoService CursoService
+@inject MateriaService MateriaService
+@inject ComisionService ComisionService
+@inject NavigationManager Navigation
+@inject AuthenticationService AuthService
+
+<PageTitle>Cursos - Academia</PageTitle>
+
+<div class="page-container">
+    <div class="page-header">
+        <div class="header-content">
+            <button class="btn-back" @onclick="@(() => Navigation.NavigateTo("/dashboard"))">
+                &larr; Volver al Dashboard
+            </button>
+            <h1>Gestión de Cursos</h1>
+            <button class="btn-primary" @onclick="OpenCreateModal">
+                + Nuevo Curso
+            </button>
+        </div>
+    </div>
+
+    <div class="page-content">
+        @if (isLoading)
+        {
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <p>Cargando cursos...</p>
+            </div>
+        }
+        else if (!cursos.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-icon">CU</div>
+                <h2>No hay cursos registrados</h2>
+                <p>Comienza creando el primer curso</p>
+                <button class="btn-primary" @onclick="OpenCreateModal">
+                    + Crear Primer Curso
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Materia</th>
+                            <th>Comisión</th>
+                            <th>Año</th>
+                            <th>Cupo</th>
+                            <th>Inscriptos</th>
+                            <th class="actions-column">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var curso in cursos)
+                        {
+                            <tr>
+                                <td>@curso.IdCurso</td>
+                                <td>@curso.NombreMateria</td>
+                                <td>@curso.DescComision</td>
+                                <td>@curso.AnioCalendario</td>
+                                <td>@curso.Cupo</td>
+                                <td>@(curso.InscriptosActuales ?? 0)</td>
+                                <td class="actions-column">
+                                    <button class="btn-action btn-edit" @onclick="@(() => OpenEditModal(curso))" title="Editar">
+                                        Editar
+                                    </button>
+                                    <button class="btn-action btn-delete" @onclick="@(() => OpenDeleteModal(curso))" title="Eliminar">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@if (showModal)
+{
+    <div class="modal-overlay" @onclick="CloseModal">
+        <div class="modal-content modal-wide" @onclick:stopPropagation="true">
+            <div class="modal-header">
+                <h2>@(isEditing ? "Editar Curso" : "Nuevo Curso")</h2>
+                <button class="btn-close" @onclick="CloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Materia *</label>
+                        <select class="form-control" @bind="currentCurso.IdMateria">
+                            <option value="">Seleccione una materia</option>
+                            @foreach (var materia in materias)
+                            {
+                                <option value="@materia.Id">@materia.Descripcion</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Comisión *</label>
+                        <select class="form-control" @bind="currentCurso.IdComision">
+                            <option value="0">Seleccione una comisión</option>
+                            @foreach (var comision in comisiones)
+                            {
+                                <option value="@comision.IdComision">@comision.DescComision</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Año Calendario *</label>
+                        <input type="number" class="form-control" @bind="currentCurso.AnioCalendario" placeholder="Ej: 2025" />
+                    </div>
+                    <div class="form-group">
+                        <label>Cupo *</label>
+                        <input type="number" class="form-control" @bind="currentCurso.Cupo" min="1" placeholder="Ej: 30" />
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert alert-danger">@errorMessage</div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" @onclick="CloseModal">Cancelar</button>
+                <button class="btn-primary" @onclick="SaveCurso">
+                    @(isEditing ? "Guardar Cambios" : "Crear Curso")
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showDeleteModal)
+{
+    <div class="modal-overlay" @onclick="CloseDeleteModal">
+        <div class="modal-content modal-small" @onclick:stopPropagation="true">
+            <div class="modal-header">
+                <h2>Confirmar Eliminación</h2>
+                <button class="btn-close" @onclick="CloseDeleteModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el curso <strong>@cursoToDelete?.NombreMateria - @cursoToDelete?.DescComision</strong>?</p>
+                <p class="text-warning">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" @onclick="CloseDeleteModal">Cancelar</button>
+                <button class="btn-danger" @onclick="DeleteCurso">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .page-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .btn-back {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover {
+        background: white;
+        color: #667eea;
+        transform: translateX(-5px);
+    }
+
+    .btn-primary {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .page-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+        background: white;
+        border-radius: 15px;
+        padding: 60px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-icon {
+        font-size: 48px;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 20px;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        letter-spacing: 3px;
+    }
+
+    .empty-state h2 {
+        color: #495057;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .data-table th {
+        padding: 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+        padding: 20px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s;
+    }
+
+    .data-table tbody tr:hover {
+        background: #f8f9fa;
+        transform: scale(1.01);
+    }
+
+    .actions-column {
+        text-align: center;
+        width: 200px;
+    }
+
+    .btn-action {
+        background: #667eea;
+        color: white;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 6px 12px;
+        margin: 0 3px;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+
+    .btn-edit {
+        background: #007bff;
+    }
+
+    .btn-edit:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn-delete {
+        background: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background: #c82333;
+        transform: scale(1.05);
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 500px;
+        animation: slideUp 0.3s;
+    }
+
+    .modal-wide {
+        max-width: 800px;
+    }
+
+    .modal-small {
+        max-width: 420px;
+    }
+
+    @@keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .modal-header {
+        padding: 25px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #495057;
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 32px;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+        line-height: 1;
+    }
+
+    .btn-close:hover {
+        background: #f8f9fa;
+        color: #495057;
+    }
+
+    .modal-body {
+        padding: 30px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    @@media (max-width: 768px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .form-group label {
+        display: block;
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 20px 30px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .text-warning {
+        color: #dc3545;
+        font-weight: 600;
+        margin-top: 15px;
+    }
+
+    .alert {
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
+@code {
+    private List<CursoDto> cursos = new();
+    private List<MateriaDto> materias = new();
+    private List<ComisionDto> comisiones = new();
+    private CursoDto currentCurso = new();
+    private CursoDto? cursoToDelete;
+    private bool isLoading = true;
+    private bool showModal = false;
+    private bool showDeleteModal = false;
+    private bool isEditing = false;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var isAuthenticated = await AuthService.IsAuthenticatedAsync();
+        if (!isAuthenticated)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        try
+        {
+            var cursosTask = CursoService.GetAllAsync();
+            var materiasTask = MateriaService.GetAllAsync();
+            var comisionesTask = ComisionService.GetAllAsync();
+
+            await Task.WhenAll(cursosTask, materiasTask, comisionesTask);
+
+            cursos = (await cursosTask).ToList();
+            materias = (await materiasTask).ToList();
+            comisiones = (await comisionesTask).ToList();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void OpenCreateModal()
+    {
+        currentCurso = new CursoDto
+        {
+            AnioCalendario = DateTime.Now.Year
+        };
+        isEditing = false;
+        errorMessage = string.Empty;
+        showModal = true;
+    }
+
+    private void OpenEditModal(CursoDto curso)
+    {
+        currentCurso = new CursoDto
+        {
+            IdCurso = curso.IdCurso,
+            IdMateria = curso.IdMateria,
+            IdComision = curso.IdComision,
+            AnioCalendario = curso.AnioCalendario,
+            Cupo = curso.Cupo
+        };
+        isEditing = true;
+        errorMessage = string.Empty;
+        showModal = true;
+    }
+
+    private void OpenDeleteModal(CursoDto curso)
+    {
+        cursoToDelete = curso;
+        showDeleteModal = true;
+    }
+
+    private void CloseModal()
+    {
+        showModal = false;
+        currentCurso = new();
+    }
+
+    private void CloseDeleteModal()
+    {
+        showDeleteModal = false;
+        cursoToDelete = null;
+    }
+
+    private async Task SaveCurso()
+    {
+        errorMessage = string.Empty;
+        
+        if (!currentCurso.IdMateria.HasValue ||
+            currentCurso.IdComision == 0 ||
+            currentCurso.AnioCalendario == 0 ||
+            currentCurso.Cupo <= 0)
+        {
+            errorMessage = "Por favor complete todos los campos requeridos.";
+            return;
+        }
+
+        var (success, error) = isEditing 
+            ? await CursoService.UpdateAsync(currentCurso)
+            : await CursoService.CreateAsync(currentCurso);
+
+        if (success)
+        {
+            await LoadData();
+            CloseModal();
+        }
+        else
+        {
+            errorMessage = error;
+        }
+    }
+
+    private async Task DeleteCurso()
+    {
+        if (cursoToDelete == null) return;
+
+        var success = await CursoService.DeleteAsync(cursoToDelete.IdCurso);
+        if (success)
+        {
+            await LoadData();
+            CloseDeleteModal();
+        }
+    }
+}

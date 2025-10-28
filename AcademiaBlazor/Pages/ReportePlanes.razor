@@ -1,0 +1,519 @@
+@page "/reportes/planes"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject PlanService planService
+@inject EspecialidadService especialidadService
+@inject ComisionService comisionService
+@inject CursoService cursoService
+@inject NavigationManager navigationManager
+@inject PdfService pdfService
+
+<div class="page-header">
+    <div class="header-content">
+        <button class="btn-back" @onclick="GoBack">
+            Volver a Reportes
+        </button>
+        <h1>Reporte de Planes de Estudio</h1>
+        <div class="header-buttons">
+            <button class="btn-export" @onclick="ExportarPDF" disabled="@isLoading">
+                @if (isExporting)
+                {
+                    <span>Exportando...</span>
+                }
+                else
+                {
+                    <span>📄 Exportar PDF</span>
+                }
+            </button>
+            <button class="btn-refresh" @onclick="LoadData">
+                Actualizar
+            </button>
+        </div>
+    </div>
+</div>
+
+@if (isLoading)
+{
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Cargando reporte...</p>
+    </div>
+}
+else
+{
+    <div class="content-wrapper">
+        <div class="filter-section">
+            <label>Filtrar por Especialidad:</label>
+            <select @bind="especialidadSeleccionada" @bind:after="FiltrarPlanes" class="filter-select">
+                <option value="0">Todas las Especialidades</option>
+                @foreach (var esp in especialidades)
+                {
+                    <option value="@esp.Id">@esp.Descripcion</option>
+                }
+            </select>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">@planesData.Count</div>
+                <div class="stat-label">Total de Planes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">@especialidades.Count</div>
+                <div class="stat-label">Especialidades</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">@planesData.Count(p => p.CursosActivos > 0)</div>
+                <div class="stat-label">Planes Activos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">@planesData.Sum(p => p.TotalInscriptos)</div>
+                <div class="stat-label">Total Inscriptos</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Distribución de Planes por Especialidad</h3>
+            <div class="chart-bars">
+                @foreach (var grupo in especialidades.Take(8))
+                {
+                    var cantidad = planes.Count(p => p.EspecialidadId == grupo.Id);
+                    if (cantidad > 0)
+                    {
+                        var maxCantidad = especialidades.Max(e => planes.Count(p => p.EspecialidadId == e.Id));
+                        var altura = maxCantidad > 0 ? (cantidad * 100.0 / maxCantidad) : 0;
+                        
+                        <div class="bar-item">
+                            <div class="bar-value">@cantidad</div>
+                            <div class="bar" style="height: @(altura)%"></div>
+                            <div class="bar-label">@(grupo.Descripcion.Length > 12 ? grupo.Descripcion.Substring(0, 12) + "..." : grupo.Descripcion)</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Plan</th>
+                        <th>Especialidad</th>
+                        <th>Comisiones</th>
+                        <th>Cursos</th>
+                        <th>Inscriptos</th>
+                        <th>Cupo Total</th>
+                        <th>Ocupación</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var plan in planesData)
+                    {
+                        <tr class="@(plan.CursosActivos == 0 ? "row-inactivo" : "row-activo")">
+                            <td>@plan.Id</td>
+                            <td>@plan.Plan</td>
+                            <td>@plan.Especialidad</td>
+                            <td>@plan.Comisiones</td>
+                            <td>@plan.CursosActivos</td>
+                            <td>@plan.TotalInscriptos</td>
+                            <td>@plan.CupoTotal</td>
+                            <td>@plan.OcupacionPorcentaje</td>
+                            <td>
+                                <span class="badge @(plan.Estado == "Activo" ? "success" : "warning")">
+                                    @plan.Estado
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private List<PlanDto> planes = new();
+    private List<EspecialidadDto> especialidades = new();
+    private List<ComisionDto> comisiones = new();
+    private List<CursoDto> cursos = new();
+    
+    private List<dynamic> planesData = new();
+    private bool isLoading = true;
+    private bool isExporting = false;
+    private int especialidadSeleccionada = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        try
+        {
+            var planesTask = planService.GetAllAsync();
+            var especialidadesTask = especialidadService.GetAllAsync();
+            var comisionesTask = comisionService.GetAllAsync();
+            var cursosTask = cursoService.GetAllAsync();
+
+            await Task.WhenAll(planesTask, especialidadesTask, comisionesTask, cursosTask);
+
+            planes = planesTask.Result.ToList();
+            especialidades = especialidadesTask.Result.ToList();
+            comisiones = comisionesTask.Result.ToList();
+            cursos = cursosTask.Result.ToList();
+
+            FiltrarPlanes();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void FiltrarPlanes()
+    {
+        var planesFiltrados = especialidadSeleccionada == 0 
+            ? planes 
+            : planes.Where(p => p.EspecialidadId == especialidadSeleccionada).ToList();
+
+        planesData = planesFiltrados.Select(p => {
+            var especialidad = especialidades.FirstOrDefault(e => e.Id == p.EspecialidadId);
+            var comisionesPlan = comisiones.Where(c => c.IdPlan == p.Id).ToList();
+            var cursosPlan = new List<CursoDto>();
+            
+            foreach (var comision in comisionesPlan)
+            {
+                cursosPlan.AddRange(cursos.Where(c => c.IdComision == comision.IdComision));
+            }
+            
+            var totalInscriptos = cursosPlan.Sum(c => c.InscriptosActuales ?? 0);
+            var totalCupos = cursosPlan.Sum(c => c.Cupo);
+            var porcentajeOcupacion = totalCupos > 0 ? (totalInscriptos * 100.0 / totalCupos) : 0;
+            
+            return new
+            {
+                Id = p.Id,
+                Plan = p.Descripcion,
+                Especialidad = especialidad?.Descripcion ?? "Sin Especialidad",
+                Comisiones = comisionesPlan.Count,
+                CursosActivos = cursosPlan.Count,
+                TotalInscriptos = totalInscriptos,
+                CupoTotal = totalCupos,
+                OcupacionPorcentaje = $"{porcentajeOcupacion:F1}%",
+                Estado = cursosPlan.Any() ? "Activo" : "Sin Cursos"
+            };
+        }).Cast<dynamic>().ToList();
+    }
+
+    private async Task ExportarPDF()
+    {
+        if (isExporting || !planes.Any()) return;
+        
+        try
+        {
+            isExporting = true;
+            await pdfService.ExportarPlanesPDF(planes, especialidades);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al exportar PDF: {ex.Message}");
+        }
+        finally
+        {
+            isExporting = false;
+        }
+    }
+
+    private void GoBack()
+    {
+        navigationManager.NavigateTo("/reportes");
+    }
+}
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .header-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-back, .btn-refresh, .btn-export {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover, .btn-refresh:hover, .btn-export:hover {
+        background: white;
+        color: #667eea;
+    }
+
+    .btn-export:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+        .btn-export:disabled:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+    .content-wrapper {
+        max-width: 1400px;
+        margin: 40px auto;
+        padding: 0 40px;
+    }
+
+    .filter-section {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .filter-section label {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .filter-select {
+        padding: 10px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        min-width: 300px;
+        cursor: pointer;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-value {
+        font-size: 36px;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .chart-container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+    }
+
+    .chart-container h3 {
+        margin: 0 0 30px 0;
+        color: #2c3e50;
+    }
+
+    .chart-bars {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        height: 250px;
+        gap: 15px;
+        padding: 20px 10px 10px 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .bar-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        max-width: 100px;
+    }
+
+    .bar-value {
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 8px;
+        font-size: 16px;
+        order: 1;
+    }
+
+    .bar {
+        width: 100%;
+        max-width: 60px;
+        min-height: 5px;
+        background: linear-gradient(180deg, #667eea, #764ba2);
+        border-radius: 5px 5px 0 0;
+        transition: all 0.3s ease;
+        order: 2;
+        position: relative;
+    }
+
+    .bar:hover {
+        transform: scaleY(1.05);
+        filter: brightness(1.1);
+    }
+
+    .bar-label {
+        font-size: 11px;
+        color: #6c757d;
+        margin-top: 8px;
+        text-align: center;
+        word-wrap: break-word;
+        max-width: 80px;
+        order: 3;
+        line-height: 1.2;
+    }
+
+    .table-wrapper {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        overflow-x: auto;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .data-table th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .data-table td {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s;
+    }
+
+    .data-table tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+    .row-activo {
+        background: rgba(212, 237, 218, 0.3);
+    }
+
+    .row-inactivo {
+        background: rgba(255, 243, 224, 0.3);
+    }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .badge.success {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .badge.warning {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>

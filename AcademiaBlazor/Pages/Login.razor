@@ -1,0 +1,686 @@
+@page "/login"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject AuthenticationService AuthService
+@inject PlanService PlanService
+@inject NavigationManager Navigation
+
+<PageTitle>Iniciar Sesion - Academia</PageTitle>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>Sistema Academico</h1>
+            <p class="subtitle">Universidad de Tecnología Nacional</p>
+        </div>
+
+        @if (!isRegisterMode)
+        {
+            <EditForm Model="@loginModel" OnValidSubmit="HandleLogin" class="login-form">
+                <DataAnnotationsValidator />
+                
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <InputText id="username" class="form-control" @bind-Value="loginModel.Username" placeholder="Ingrese su usuario" />
+                    <ValidationMessage For="@(() => loginModel.Username)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contrasena</label>
+                    <InputText id="password" type="password" class="form-control" @bind-Value="loginModel.Password" placeholder="Ingrese su contrasena" />
+                    <ValidationMessage For="@(() => loginModel.Password)" />
+                </div>
+
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @errorMessage
+                    </div>
+                }
+
+                <button type="submit" class="btn-login" disabled="@isLoading">
+                    @if (isLoading)
+                    {
+                        <span>Ingresando...</span>
+                    }
+                    else
+                    {
+                        <span>Ingresar</span>
+                    }
+                </button>
+            </EditForm>
+
+            <div class="login-footer">
+                <p class="info-text">
+                    <strong>Usuario de prueba:</strong> admin / admin123
+                </p>
+                <button class="btn-link-register" @onclick="ToggleRegisterMode">
+                    No tienes cuenta? <strong>Registrate aqui</strong>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="register-scroll">
+                <div class="register-note">
+                    <div class="note-icon">!</div>
+                    <div class="note-content">
+                        <strong>Nota Importante:</strong> Solo se pueden registrar <strong>Profesores</strong> y <strong>Alumnos</strong>.<br/>
+                        Los Administradores son creados por el sistema.
+                    </div>
+                </div>
+
+                <EditForm Model="@registerModel" OnValidSubmit="HandleRegister" class="login-form">
+                    <DataAnnotationsValidator />
+                    
+                    <h3 class="section-title">Datos de Acceso</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-username">Usuario *</label>
+                            <InputText id="reg-username" class="form-control" @bind-Value="registerModel.UsuarioNombre" placeholder="Minimo 4 caracteres" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-email">Email *</label>
+                            <InputText id="reg-email" type="email" class="form-control" @bind-Value="registerModel.Email" placeholder="correo@ejemplo.com" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-password">Contraseña *</label>
+                            <InputText id="reg-password" type="password" class="form-control" @bind-Value="registerModel.Password" placeholder="Minimo 6 caracteres" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-confirm-password">Confirmar Contraseña *</label>
+                            <InputText id="reg-confirm-password" type="password" class="form-control" @bind-Value="confirmPassword" placeholder="Repetir contrasena" />
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+                    <h3 class="section-title">Datos Personales</h3>
+
+                    <div class="form-group">
+                        <label for="reg-tipo">Me registro como *</label>
+                        <select id="reg-tipo" class="form-control" @bind="registerModel.TipoPersona">
+                            <option value="">-- Seleccione --</option>
+                            <option value="@TipoPersonaDto.Profesor">Profesor</option>
+                            <option value="@TipoPersonaDto.Alumno">Alumno</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-nombre">Nombre *</label>
+                            <InputText id="reg-nombre" class="form-control" @bind-Value="registerModel.Nombre" placeholder="Nombre" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-apellido">Apellido *</label>
+                            <InputText id="reg-apellido" class="form-control" @bind-Value="registerModel.Apellido" placeholder="Apellido" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reg-fecha">Fecha de Nacimiento *</label>
+                            <InputDate id="reg-fecha" class="form-control" @bind-Value="registerModel.FechaNacimiento" max="@DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd")" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-direccion">Direccion *</label>
+                            <InputText id="reg-direccion" class="form-control" @bind-Value="registerModel.Direccion" placeholder="Calle, numero, ciudad" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-telefono">Telefono</label>
+                        <InputText id="reg-telefono" class="form-control" @bind-Value="registerModel.Telefono" placeholder="+54 9 11 1234-5678 (opcional)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-plan">Plan de Estudios</label>
+                        <select id="reg-plan" class="form-control" @bind="registerModel.IdPlan">
+                            <option value="">-- Sin plan asignado (opcional) --</option>
+                            @foreach (var plan in planes)
+                            {
+                                <option value="@plan.Id">@plan.Descripcion - @plan.DescripcionEspecialidad</option>
+                            }
+                        </select>
+                        <small class="form-text text-muted">El plan puede asignarse despues si lo desea</small>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Error:</strong> @errorMessage
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(successMessage))
+                    {
+                        <div class="alert alert-success">
+                            <strong>Exito:</strong> @successMessage
+                        </div>
+                    }
+
+                    <div class="info-note">
+                        <small>
+                            <strong>*</strong> Campos obligatorios<br/>
+                            El legajo se generara automaticamente<br/>
+                            El plan es opcional (puede asignarse despues)
+                        </small>
+                    </div>
+
+                    <button type="submit" class="btn-login" disabled="@isLoading">
+                        @if (isLoading)
+                        {
+                            <span>Registrando...</span>
+                        }
+                        else
+                        {
+                            <span>Registrarse</span>
+                        }
+                    </button>
+                </EditForm>
+            </div>
+
+            <div class="login-footer">
+                <button class="btn-link-register" @onclick="ToggleRegisterMode">
+                    Ya tienes cuenta? <strong>Inicia sesion aqui</strong>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+    }
+
+    .login-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        width: 100%;
+        max-width: 700px;
+        max-height: 90vh;
+        animation: slideIn 0.5s ease-out;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @@keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .login-header h1 {
+        color: #667eea;
+        font-size: 32px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+
+    .subtitle {
+        color: #6c757d;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .register-note {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffe4a3 100%);
+        border-left: 4px solid #ff9800;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 25px;
+        display: flex;
+        gap: 15px;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .note-icon {
+        font-size: 28px;
+        flex-shrink: 0;
+    }
+
+    .note-content {
+        color: #856404;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .register-scroll {
+        max-height: calc(90vh - 250px);
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .register-scroll::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .register-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .register-scroll::-webkit-scrollbar-thumb {
+        background: #667eea;
+        border-radius: 10px;
+    }
+
+    .login-form {
+        margin-top: 30px;
+    }
+
+    .section-title {
+        color: #667eea;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    .divider {
+        height: 1px;
+        background: #e9ecef;
+        margin: 30px 0;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    @@media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-control, select.form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus, select.form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+    }
+
+    .text-muted {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+    }
+
+    .btn-login:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-login:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-link-register {
+        background: none;
+        border: none;
+        color: #667eea;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 10px;
+        margin-top: 10px;
+        text-decoration: none;
+        transition: all 0.3s;
+        width: 100%;
+    }
+
+    .btn-link-register:hover {
+        text-decoration: underline;
+    }
+
+    .alert {
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .login-footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #e9ecef;
+        text-align: center;
+    }
+
+    .info-text {
+        color: #6c757d;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .info-note {
+        background: #f8f9fa;
+        border-left: 4px solid #667eea;
+        border-radius: 5px;
+        padding: 12px 15px;
+        color: #495057;
+        font-size: 12px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        line-height: 1.8;
+    }
+
+    .validation-message {
+        color: #dc3545;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+</style>
+
+@code {
+    private LoginModel loginModel = new();
+    private RegisterRequestDto registerModel = new();
+    private List<PlanDto> planes = new();
+    private string confirmPassword = string.Empty;
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+    private bool isLoading = false;
+    private bool isRegisterMode = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Cargar planes para el registro
+        try
+        {
+            planes = (await PlanService.GetAllAsync()).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar planes: {ex.Message}");
+        }
+
+        // Inicializar fecha de nacimiento predeterminada
+        registerModel.FechaNacimiento = DateTime.Now.AddYears(-18);
+    }
+
+    private async Task HandleLogin()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            var success = await AuthService.LoginAsync(loginModel.Username, loginModel.Password);
+            
+            if (success)
+            {
+                var currentUser = await AuthService.GetCurrentUserAsync();
+                
+                if (currentUser != null)
+                {
+                    if (currentUser.TipoUsuario == "Administrador")
+                    {
+                        Navigation.NavigateTo("/dashboard");
+                    }
+                    else if (currentUser.TipoUsuario == "Profesor")
+                    {
+                        Navigation.NavigateTo("/profesor/dashboard");
+                    }
+                    else if (currentUser.TipoUsuario == "Alumno")
+                    {
+                        Navigation.NavigateTo("/alumno/dashboard");
+                    }
+                    else
+                    {
+                        Navigation.NavigateTo("/dashboard");
+                    }
+                }
+                else
+                {
+                    Navigation.NavigateTo("/dashboard");
+                }
+            }
+            else
+            {
+                errorMessage = "Usuario o contrasena incorrectos";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al iniciar sesion: {ex.Message}";
+            Console.WriteLine($"Error en login: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task HandleRegister()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+
+        try
+        {
+            // Validación: Usuario
+            if (string.IsNullOrWhiteSpace(registerModel.UsuarioNombre))
+            {
+                errorMessage = "Debe ingresar un nombre de usuario.";
+                return;
+            }
+
+            if (registerModel.UsuarioNombre.Length < 4)
+            {
+                errorMessage = "El nombre de usuario debe tener al menos 4 caracteres.";
+                return;
+            }
+
+            // Validación: Email
+            if (string.IsNullOrWhiteSpace(registerModel.Email))
+            {
+                errorMessage = "Debe ingresar un email.";
+                return;
+            }
+
+            if (!registerModel.Email.Contains("@"))
+            {
+                errorMessage = "El email no tiene un formato valido.";
+                return;
+            }
+
+            // Validación: Contraseña
+            if (string.IsNullOrWhiteSpace(registerModel.Password))
+            {
+                errorMessage = "Debe ingresar una contraseña.";
+                return;
+            }
+
+            if (registerModel.Password.Length < 6)
+            {
+                errorMessage = "La contraseña debe tener al menos 6 caracteres.";
+                return;
+            }
+
+            if (registerModel.Password != confirmPassword)
+            {
+                errorMessage = "Las contrasenas no coinciden.";
+                return;
+            }
+
+            // Validación: Tipo de Persona
+            // TipoPersona: Alumno=0, Profesor=1 - ambos son válidos
+            // No validar porque Alumno tiene valor 0
+
+            // Validación: Nombre y Apellido
+            if (string.IsNullOrWhiteSpace(registerModel.Nombre))
+            {
+                errorMessage = "Debe ingresar el nombre.";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(registerModel.Apellido))
+            {
+                errorMessage = "Debe ingresar el apellido.";
+                return;
+            }
+
+            // Validación: Dirección
+            if (string.IsNullOrWhiteSpace(registerModel.Direccion))
+            {
+                errorMessage = "Debe ingresar la direccion.";
+                return;
+            }
+
+            // Validación: Fecha de Nacimiento
+            if (registerModel.FechaNacimiento == default)
+            {
+                errorMessage = "La fecha de nacimiento es obligatoria.";
+                return;
+            }
+
+            var edad = DateTime.Now.Year - registerModel.FechaNacimiento.Year;
+            if (registerModel.FechaNacimiento > DateTime.Now.AddYears(-edad)) edad--;
+
+            if (edad < 15)
+            {
+                errorMessage = "La persona debe tener al menos 15 años.";
+                return;
+            }
+
+            // El legajo se generará automáticamente en el backend
+            registerModel.Legajo = null;
+            
+            // El plan es OPCIONAL (puede ser null)
+            // No se valida como obligatorio
+            
+            var success = await AuthService.RegisterAsync(registerModel);
+            
+            if (success)
+            {
+                string planInfo = registerModel.IdPlan.HasValue 
+                    ? $" con plan asignado" 
+                    : " sin plan asignado (puede asignarse despues)";
+
+                successMessage = $"Registro exitoso{planInfo}! Redirigiendo al inicio de sesion...";
+                await Task.Delay(2000);
+                
+                isRegisterMode = false;
+                loginModel.Username = registerModel.UsuarioNombre;
+                successMessage = string.Empty;
+                registerModel = new RegisterRequestDto 
+                { 
+                    FechaNacimiento = DateTime.Now.AddYears(-18) 
+                };
+                confirmPassword = string.Empty;
+            }
+            else
+            {
+                errorMessage = "Error al registrarse. El usuario o email ya existe.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al registrarse: {ex.Message}";
+            Console.WriteLine($"Error en registro: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ToggleRegisterMode()
+    {
+        isRegisterMode = !isRegisterMode;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+        loginModel = new LoginModel();
+        registerModel = new RegisterRequestDto 
+        { 
+            FechaNacimiento = DateTime.Now.AddYears(-18) 
+        };
+        confirmPassword = string.Empty;
+    }
+
+    private class LoginModel
+    {
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
+}

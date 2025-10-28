@@ -1,0 +1,919 @@
+@page "/reportes/cursos"
+@using AcademiaBlazor.Services
+@using DTOs
+@using System.Globalization
+@inject CursoService cursoService
+@inject InscripcionService inscripcionService
+@inject NavigationManager navigationManager
+@inject PdfService pdfService
+
+<div class="page-header">
+    <div class="header-content">
+        <button class="btn-back" @onclick="GoBack">
+            Volver a Reportes
+        </button>
+        <h1>Reporte de Cursos</h1>
+        <div class="header-buttons">
+            <button class="btn-export" @onclick="ExportarPDF" disabled="@isLoading">
+                @if (isExporting)
+                {
+                    <span>Exportando...</span>
+                }
+                else
+                {
+                    <span>📄 Exportar PDF</span>
+                }
+            </button>
+            <button class="btn-refresh" @onclick="LoadData">
+                Actualizar
+            </button>
+        </div>
+    </div>
+</div>
+
+@if (isLoading)
+{
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Cargando reporte...</p>
+    </div>
+}
+else
+{
+    <div class="content-wrapper">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">@cursos.Count</div>
+                <div class="stat-label">Total de Cursos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">@cursos.Count(c => c.Cupo > (c.InscriptosActuales ?? 0))</div>
+                <div class="stat-label">Cursos Disponibles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">@cursos.Count(c => c.Cupo <= (c.InscriptosActuales ?? 0))</div>
+                <div class="stat-label">Cursos Completos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">@cursos.Sum(c => c.InscriptosActuales ?? 0)</div>
+                <div class="stat-label">Total Inscriptos</div>
+            </div>
+        </div>
+
+        @if (cursoSeleccionado != null && alumnosCurso.Any())
+        {
+            <div class="charts-container">
+                <div class="chart-section">
+                    <h3>Distribucion de Condiciones - @cursoSeleccionado.NombreMateria</h3>
+                    <div class="pie-chart-container">
+                        @{
+                            var promocionales = alumnosCurso.Count(a => a.Condicion == CondicionAlumnoDto.Promocional);
+                            var regulares = alumnosCurso.Count(a => a.Condicion == CondicionAlumnoDto.Regular);
+                            var libres = alumnosCurso.Count(a => a.Condicion == CondicionAlumnoDto.Libre);
+                            var totalAlumnos = alumnosCurso.Count;
+                        }
+
+                        <svg viewBox="0 0 200 200" class="pie-chart">
+                            @{
+                                var cx = 100.0;
+                                var cy = 100.0;
+                                var radius = 70.0;
+                                var currentAngle = -90.0; 
+
+                                if (totalAlumnos > 0)
+                                {
+                                    
+                                    if (promocionales > 0)
+                                    {
+                                        var angle = (promocionales * 360.0) / totalAlumnos;
+                                        var startRad = currentAngle * Math.PI / 180;
+                                        var endRad = (currentAngle + angle) * Math.PI / 180;
+                                        var x1 = cx + radius * Math.Cos(startRad);
+                                        var y1 = cy + radius * Math.Sin(startRad);
+                                        var x2 = cx + radius * Math.Cos(endRad);
+                                        var y2 = cy + radius * Math.Sin(endRad);
+                                        var largeArcFlag = angle > 180 ? 1 : 0;
+                                        var pathData = $"M {cx.ToString("F2", CultureInfo.InvariantCulture)} {cy.ToString("F2", CultureInfo.InvariantCulture)} L {x1.ToString("F2", CultureInfo.InvariantCulture)} {y1.ToString("F2", CultureInfo.InvariantCulture)} A {radius} {radius} 0 {largeArcFlag} 1 {x2.ToString("F2", CultureInfo.InvariantCulture)} {y2.ToString("F2", CultureInfo.InvariantCulture)} Z";
+
+                                        <path d="@pathData" fill="#28a745" stroke="white" stroke-width="2" />
+                                        currentAngle += angle;
+                                    }
+
+                                    
+                                    if (regulares > 0)
+                                    {
+                                        var angle = (regulares * 360.0) / totalAlumnos;
+                                        var startRad = currentAngle * Math.PI / 180;
+                                        var endRad = (currentAngle + angle) * Math.PI / 180;
+                                        var x1 = cx + radius * Math.Cos(startRad);
+                                        var y1 = cy + radius * Math.Sin(startRad);
+                                        var x2 = cx + radius * Math.Cos(endRad);
+                                        var y2 = cy + radius * Math.Sin(endRad);
+                                        var largeArcFlag = angle > 180 ? 1 : 0;
+                                        var pathData = $"M {cx.ToString("F2", CultureInfo.InvariantCulture)} {cy.ToString("F2", CultureInfo.InvariantCulture)} L {x1.ToString("F2", CultureInfo.InvariantCulture)} {y1.ToString("F2", CultureInfo.InvariantCulture)} A {radius} {radius} 0 {largeArcFlag} 1 {x2.ToString("F2", CultureInfo.InvariantCulture)} {y2.ToString("F2", CultureInfo.InvariantCulture)} Z";
+
+                                        <path d="@pathData" fill="#007bff" stroke="white" stroke-width="2" />
+                                        currentAngle += angle;
+                                    }
+
+                                   
+                                    if (libres > 0)
+                                    {
+                                        var angle = (libres * 360.0) / totalAlumnos;
+                                        var startRad = currentAngle * Math.PI / 180;
+                                        var endRad = (currentAngle + angle) * Math.PI / 180;
+                                        var x1 = cx + radius * Math.Cos(startRad);
+                                        var y1 = cy + radius * Math.Sin(startRad);
+                                        var x2 = cx + radius * Math.Cos(endRad);
+                                        var y2 = cy + radius * Math.Sin(endRad);
+                                        var largeArcFlag = angle > 180 ? 1 : 0;
+                                        var pathData = $"M {cx.ToString("F2", CultureInfo.InvariantCulture)} {cy.ToString("F2", CultureInfo.InvariantCulture)} L {x1.ToString("F2", CultureInfo.InvariantCulture)} {y1.ToString("F2", CultureInfo.InvariantCulture)} A {radius} {radius} 0 {largeArcFlag} 1 {x2.ToString("F2", CultureInfo.InvariantCulture)} {y2.ToString("F2", CultureInfo.InvariantCulture)} Z";
+
+                                        <path d="@pathData" fill="#fd7e14" stroke="white" stroke-width="2" />
+                                    }
+                                }
+                            }
+
+                            <circle cx="100" cy="100" r="40" fill="white" />
+
+                            <text x="100" y="95" text-anchor="middle" font-size="22" font-weight="bold" fill="#2c3e50">
+                                @totalAlumnos
+                            </text>
+                            <text x="100" y="112" text-anchor="middle" font-size="11" fill="#6c757d">
+                                Alumnos
+                            </text>
+                        </svg>
+
+                        <div class="pie-legend">
+                            @if (promocionales > 0)
+                            {
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #28a745;"></span>
+                                    <span class="legend-text">Promocional: @promocionales (@((promocionales * 100.0 / totalAlumnos).ToString("F1"))%)</span>
+                                </div>
+                            }
+                            @if (regulares > 0)
+                            {
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #007bff;"></span>
+                                    <span class="legend-text">Regular: @regulares (@((regulares * 100.0 / totalAlumnos).ToString("F1"))%)</span>
+                                </div>
+                            }
+                            @if (libres > 0)
+                            {
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #fd7e14;"></span>
+                                    <span class="legend-text">Libre: @libres (@((libres * 100.0 / totalAlumnos).ToString("F1"))%)</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-section">
+                    <h3>Ocupacion de Cupos</h3>
+                    <div class="pie-chart-container">
+                        @{
+                            var inscriptos = cursoSeleccionado.InscriptosActuales ?? 0;
+                            var cupoTotal = cursoSeleccionado.Cupo;
+                            var disponibles = cupoTotal - inscriptos;
+                            var porcentajeOcupado = cupoTotal > 0 ? (inscriptos * 100.0 / cupoTotal) : 0;
+                            var porcentajeDisponible = cupoTotal > 0 ? (disponibles * 100.0 / cupoTotal) : 0;
+                        }
+
+                        <svg viewBox="0 0 200 200" class="pie-chart">
+                            @{
+                               
+                                var cx2 = 100.0;
+                                var cy2 = 100.0;
+                                var radius2 = 70.0;
+                                var currentAngle2 = -90.0; 
+
+                                if (cupoTotal > 0)
+                                {
+                                    if (inscriptos > 0)
+                                    {
+                                        var angle = (inscriptos * 360.0) / cupoTotal;
+                                        var startRad = currentAngle2 * Math.PI / 180;
+                                        var endRad = (currentAngle2 + angle) * Math.PI / 180;
+                                        var x1 = cx2 + radius2 * Math.Cos(startRad);
+                                        var y1 = cy2 + radius2 * Math.Sin(startRad);
+                                        var x2 = cx2 + radius2 * Math.Cos(endRad);
+                                        var y2 = cy2 + radius2 * Math.Sin(endRad);
+                                        var largeArcFlag = angle > 180 ? 1 : 0;
+                                        var pathData = $"M {cx2.ToString("F2", CultureInfo.InvariantCulture)} {cy2.ToString("F2", CultureInfo.InvariantCulture)} L {x1.ToString("F2", CultureInfo.InvariantCulture)} {y1.ToString("F2", CultureInfo.InvariantCulture)} A {radius2} {radius2} 0 {largeArcFlag} 1 {x2.ToString("F2", CultureInfo.InvariantCulture)} {y2.ToString("F2", CultureInfo.InvariantCulture)} Z";
+
+                                        <path d="@pathData" fill="#6f42c1" stroke="white" stroke-width="2" />
+                                        currentAngle2 += angle;
+                                    }
+
+                                    if (disponibles > 0)
+                                    {
+                                        var angle = (disponibles * 360.0) / cupoTotal;
+                                        var startRad = currentAngle2 * Math.PI / 180;
+                                        var endRad = (currentAngle2 + angle) * Math.PI / 180;
+                                        var x1 = cx2 + radius2 * Math.Cos(startRad);
+                                        var y1 = cy2 + radius2 * Math.Sin(startRad);
+                                        var x2 = cx2 + radius2 * Math.Cos(endRad);
+                                        var y2 = cy2 + radius2 * Math.Sin(endRad);
+                                        var largeArcFlag = angle > 180 ? 1 : 0;
+                                        var pathData = $"M {cx2.ToString("F2", CultureInfo.InvariantCulture)} {cy2.ToString("F2", CultureInfo.InvariantCulture)} L {x1.ToString("F2", CultureInfo.InvariantCulture)} {y1.ToString("F2", CultureInfo.InvariantCulture)} A {radius2} {radius2} 0 {largeArcFlag} 1 {x2.ToString("F2", CultureInfo.InvariantCulture)} {y2.ToString("F2", CultureInfo.InvariantCulture)} Z";
+
+                                        <path d="@pathData" fill="#28a745" stroke="white" stroke-width="2" />
+                                    }
+
+                                    if (disponibles <= 0 && inscriptos > 0)
+                                    {
+                                        <circle cx="@cx2" cy="@cy2" r="@radius2" fill="#dc3545" stroke="white" stroke-width="2" />
+                                    }
+                                }
+                            }
+
+                            <circle cx="100" cy="100" r="40" fill="white" />
+
+                            <text x="100" y="95" text-anchor="middle" font-size="22" font-weight="bold" fill="#2c3e50">
+                                @porcentajeDisponible.ToString("F1")%
+                            </text>
+                            <text x="100" y="112" text-anchor="middle" font-size="11" fill="#6c757d">
+                                Disponible
+                            </text>
+                        </svg>
+
+                        <div class="pie-legend">
+                            @if (inscriptos > 0)
+                            {
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #6f42c1;"></span>
+                                    <span class="legend-text">Inscriptos: @inscriptos (@porcentajeOcupado.ToString("F1")%)</span>
+                                </div>
+                            }
+                            @if (disponibles > 0)
+                            {
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #28a745;"></span>
+                                    <span class="legend-text">Disponibles: @disponibles (@porcentajeDisponible.ToString("F1")%)</span>
+                                </div>
+                            }
+                            @if (disponibles <= 0 && inscriptos > 0)
+                            {
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #dc3545;"></span>
+                                    <span class="legend-text">COMPLETO</span>
+                                </div>
+                            }
+                            <div class="legend-item total">
+                                <strong>Cupo Total: @cursoSeleccionado.Cupo</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="table-wrapper">
+            <h3 class="section-title">Seleccione un curso para ver detalles</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Materia</th>
+                        <th>Comision</th>
+                        <th>Anio</th>
+                        <th>Cupo</th>
+                        <th>Inscriptos</th>
+                        <th>Disponible</th>
+                        <th>Ocupacion</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var curso in cursos.OrderByDescending(c => c.InscriptosActuales))
+                    {
+                        var disponible = curso.Cupo - (curso.InscriptosActuales ?? 0);
+                        var ocupacion = curso.Cupo > 0 ? ((curso.InscriptosActuales ?? 0) * 100.0 / curso.Cupo) : 0;
+                        var estado = disponible <= 0 ? "Completo" : disponible <= 5 ? "Casi Lleno" : "Disponible";
+                        var isSelected = cursoSeleccionado?.IdCurso == curso.IdCurso;
+
+                        <tr class="@GetRowClass(estado) @(isSelected ? "selected-row" : "")" @onclick="() => SeleccionarCurso(curso)">
+                            <td>@curso.IdCurso</td>
+                            <td>@curso.NombreMateria</td>
+                            <td>@curso.DescComision</td>
+                            <td>@curso.AnioCalendario</td>
+                            <td>@curso.Cupo</td>
+                            <td>@curso.InscriptosActuales</td>
+                            <td>@disponible</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: @ocupacion%"></div>
+                                    <span class="progress-text">@ocupacion.ToString("F1")%</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge @GetBadgeClass(estado)">
+                                    @estado
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @if (cursoSeleccionado != null)
+        {
+            <div class="detalle-curso">
+                <h3>Detalles del Curso Seleccionado</h3>
+                <div class="detalle-grid">
+                    <div class="detalle-item">
+                        <strong>Materia:</strong>
+                        <span>@cursoSeleccionado.NombreMateria</span>
+                    </div>
+                    <div class="detalle-item">
+                        <strong>Comision:</strong>
+                        <span>@cursoSeleccionado.DescComision</span>
+                    </div>
+                    <div class="detalle-item">
+                        <strong>Anio:</strong>
+                        <span>@cursoSeleccionado.AnioCalendario</span>
+                    </div>
+                    <div class="detalle-item">
+                        <strong>Cupo Total:</strong>
+                        <span>@cursoSeleccionado.Cupo</span>
+                    </div>
+                    <div class="detalle-item">
+                        <strong>Inscriptos:</strong>
+                        <span>@cursoSeleccionado.InscriptosActuales</span>
+                    </div>
+                    <div class="detalle-item">
+                        <strong>Disponibles:</strong>
+                        <span>@(cursoSeleccionado.Cupo - (cursoSeleccionado.InscriptosActuales ?? 0))</span>
+                    </div>
+                </div>
+
+                @if (alumnosCurso.Any())
+                {
+                    <h4>Alumnos Inscriptos (@alumnosCurso.Count)</h4>
+                    <div class="alumnos-list">
+                        @foreach (var alumno in alumnosCurso)
+                        {
+                            <div class="alumno-card">
+                                <div class="alumno-nombre">
+                                    <strong>@alumno.ApellidoAlumno, @alumno.NombreAlumno</strong>
+                                    <span class="legajo">Legajo: @alumno.LegajoAlumno</span>
+                                </div>
+                                <div class="alumno-info">
+                                    <span class="badge @GetCondicionBadge(alumno.Condicion)">
+                                        @alumno.Condicion
+                                    </span>
+                                    <span class="nota">Nota: @(alumno.Nota?.ToString() ?? "-")</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-message">
+                        <p>No hay alumnos inscriptos en este curso</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<CursoDto> cursos = new();
+    private List<AlumnoCursoDto> alumnosCurso = new();
+    private CursoDto? cursoSeleccionado;
+    private bool isLoading = true;
+    private bool isExporting = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        try
+        {
+            var cursosData = await cursoService.GetAllAsync();
+            cursos = cursosData.ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task SeleccionarCurso(CursoDto curso)
+    {
+        cursoSeleccionado = curso;
+        try
+        {
+            var inscripciones = await inscripcionService.GetByCursoAsync(curso.IdCurso);
+            alumnosCurso = inscripciones.ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar alumnos: {ex.Message}");
+            alumnosCurso = new List<AlumnoCursoDto>();
+        }
+    }
+
+    private string GetRowClass(string estado)
+    {
+        return estado switch
+        {
+            "Completo" => "row-completo",
+            "Casi Lleno" => "row-casi-lleno",
+            _ => ""
+        };
+    }
+
+    private string GetBadgeClass(string estado)
+    {
+        return estado switch
+        {
+            "Completo" => "danger",
+            "Casi Lleno" => "warning",
+            _ => "success"
+        };
+    }
+
+    private string GetCondicionBadge(CondicionAlumnoDto condicion)
+    {
+        return condicion switch
+        {
+            CondicionAlumnoDto.Promocional => "success",
+            CondicionAlumnoDto.Regular => "info",
+            CondicionAlumnoDto.Libre => "warning",
+            _ => "default"
+        };
+    }
+
+    private async Task ExportarPDF()
+    {
+        if (isExporting || !cursos.Any()) return;
+        
+        try
+        {
+            isExporting = true;
+            await pdfService.ExportarCursosPDF(cursos);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al exportar PDF: {ex.Message}");
+        }
+        finally
+        {
+            isExporting = false;
+        }
+    }
+
+    private void GoBack()
+    {
+        navigationManager.NavigateTo("/reportes");
+    }
+}
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .header-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-back, .btn-refresh, .btn-export {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .btn-back:hover, .btn-refresh:hover, .btn-export:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-export:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+            .btn-export:disabled:hover {
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+
+    .content-wrapper {
+        max-width: 1400px;
+        margin: 40px auto;
+        padding: 0 40px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+    .stat-value {
+        font-size: 36px;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .charts-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .chart-section {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+        .chart-section h3 {
+            color: #2c3e50;
+            margin: 0 0 25px 0;
+            font-size: 18px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+    .pie-chart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .pie-chart {
+        width: 200px;
+        height: 200px;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    .pie-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+        .legend-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .legend-item.total {
+            background: #667eea;
+            color: white;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+    .legend-color {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
+    .legend-text {
+        font-size: 14px;
+        color: #495057;
+        font-weight: 500;
+        flex: 1;
+    }
+
+    .section-title {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .table-wrapper {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        overflow-x: auto;
+        margin-bottom: 30px;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table tbody tr {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+            .data-table tbody tr:hover {
+                background: #f8f9fa;
+            }
+
+    .selected-row {
+        background: #e7f1ff !important;
+        border-left: 4px solid #667eea;
+    }
+
+    .row-completo {
+        background: rgba(255, 231, 231, 0.3);
+    }
+
+    .row-casi-lleno {
+        background: rgba(255, 243, 205, 0.3);
+    }
+
+    .progress-bar {
+        position: relative;
+        width: 100%;
+        height: 25px;
+        background: #e9ecef;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: width 0.3s;
+    }
+
+    .progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+        .badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .badge.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge.danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge.default {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+    .detalle-curso {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+        .detalle-curso h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .detalle-curso h4 {
+            color: #495057;
+            margin: 25px 0 15px 0;
+        }
+
+    .detalle-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .detalle-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+        .detalle-item strong {
+            color: #495057;
+        }
+
+        .detalle-item span {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+    .alumnos-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 15px;
+    }
+
+    .alumno-card {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s;
+    }
+
+        .alumno-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .alumno-nombre {
+        margin-bottom: 10px;
+    }
+
+        .alumno-nombre strong {
+            display: block;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+    .legajo {
+        font-size: 12px;
+        color: #6c757d;
+    }
+
+    .alumno-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nota {
+        font-size: 13px;
+        color: #495057;
+        font-weight: 600;
+    }
+
+    .empty-message {
+        text-align: center;
+        padding: 30px;
+        color: #6c757d;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .header-content {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .content-wrapper {
+            padding: 0 20px;
+        }
+
+        .charts-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

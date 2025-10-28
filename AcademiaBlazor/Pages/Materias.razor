@@ -1,0 +1,754 @@
+@page "/materias"
+@using AcademiaBlazor.Services
+@using DTOs
+@inject MateriaService MateriaService
+@inject PlanService PlanService
+@inject NavigationManager Navigation
+@inject AuthenticationService AuthService
+
+<PageTitle>Materias - Academia</PageTitle>
+
+<div class="page-container">
+    <div class="page-header">
+        <div class="header-content">
+            <button class="btn-back" @onclick="GoBack">
+                Volver al Dashboard
+            </button>
+            <h1>Gestión de Materias</h1>
+            <button class="btn-primary" @onclick="OpenCreateDialog">
+                + Nueva Materia
+            </button>
+        </div>
+    </div>
+
+    <div class="page-content">
+        @if (isLoading)
+        {
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <p>Cargando materias...</p>
+            </div>
+        }
+        else if (!materias.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-icon">MA</div>
+                <h2>No hay materias registradas</h2>
+                <p>Comienza creando la primera materia</p>
+                <button class="btn-primary" @onclick="OpenCreateDialog">
+                    <span class="icon">+</span> Crear Primera Materia
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>Horas Semanales</th>
+                            <th>Horas Totales</th>
+                            <th>Plan</th>
+                            <th class="actions-column">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var materia in materias)
+                        {
+                            <tr>
+                                <td>@materia.Id</td>
+                                <td><strong>@materia.Descripcion</strong></td>
+                                <td>@materia.HorasSemanales</td>
+                                <td>@materia.HorasTotales</td>
+                                <td>@GetPlanNombre(materia.IdPlan)</td>
+                                <td class="actions-column">
+                                    <button class="btn-action btn-edit" @onclick="() => OpenEditDialog(materia)" title="Editar">
+                                        Editar
+                                    </button>
+                                    <button class="btn-action btn-delete" @onclick="() => DeleteMateria(materia)" title="Eliminar">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@if (showDialog)
+{
+    <div class="modal-overlay" @onclick="CloseDialog">
+        <div class="modal-content modal-wide" @onclick:stopPropagation>
+            <div class="modal-header">
+                <h2>@(isEditMode ? "Editar Materia" : "Nueva Materia")</h2>
+                <button class="btn-close" @onclick="CloseDialog">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <EditForm Model="@currentMateria" OnValidSubmit="HandleSave">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción *</label>
+                            <InputText id="descripcion" class="form-control" @bind-Value="currentMateria.Descripcion" placeholder="Ingrese descripción" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plan">Plan *</label>
+                            <InputSelect id="plan" class="form-control" @bind-Value="currentMateria.IdPlan">
+                                <option value="0">-- Seleccione un plan --</option>
+                                @foreach (var plan in planes)
+                                {
+                                    <option value="@plan.Id">@plan.Descripcion</option>
+                                }
+                            </InputSelect>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horasSemanales">Horas Semanales *</label>
+                            <InputNumber id="horasSemanales" class="form-control" @bind-Value="currentMateria.HorasSemanales" placeholder="Horas por semana" min="1"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horasTotales">Horas Totales *</label>
+                            <InputNumber id="horasTotales" class="form-control" @bind-Value="currentMateria.HorasTotales" placeholder="Total de horas" min="1"/>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            @errorMessage
+                        </div>
+                    }
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" @onclick="CloseDialog">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-primary" disabled="@isSaving">
+                            @(isSaving ? "Guardando..." : "Guardar")
+                        </button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+@if (showConfirmDialog)
+{
+    <div class="modal-overlay" @onclick="CloseConfirmDialog">
+        <div class="modal-content confirm-modal" @onclick:stopPropagation>
+            <div class="modal-header">
+                <h2>Confirmar Eliminación</h2>
+            </div>
+            
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar la materia <strong>"@materiaToDelete?.Descripcion"</strong>?</p>
+                <p class="warning-text">Esta acción no se puede deshacer.</p>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" @onclick="CloseConfirmDialog">
+                        Cancelar
+                    </button>
+                    <button class="btn-danger" @onclick="ConfirmDelete" disabled="@isDeleting">
+                        @(isDeleting ? "Eliminando..." : "Eliminar")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .page-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
+    }
+
+    .btn-back {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover {
+        background: white;
+        color: #667eea;
+        transform: translateX(-5px);
+    }
+
+    .btn-primary {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .page-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+        background: white;
+        border-radius: 15px;
+        padding: 60px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .empty-state h2 {
+        color: #495057;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .data-table th {
+        padding: 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+        padding: 20px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .data-table tbody tr {
+        transition: all 0.3s;
+    }
+
+    .data-table tbody tr:hover {
+        background: #f8f9fa;
+        transform: scale(1.01);
+    }
+
+    .actions-column {
+        text-align: center;
+        width: 200px;
+    }
+
+    .btn-action {
+        background: #667eea;
+        color: white;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        padding: 8px 12px;
+        margin: 0 5px;
+        border-radius: 8px;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
+
+    .btn-edit:hover {
+        background: #5568d3;
+        transform: scale(1.05);
+    }
+
+    .btn-delete {
+        background: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background: #c82333;
+        transform: scale(1.05);
+    }
+
+    .modal-wide {
+        max-width: 800px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    @@media (max-width: 768px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 500px;
+        animation: slideUp 0.3s;
+    }
+
+    .confirm-modal {
+        max-width: 400px;
+    }
+
+    @@keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .modal-header {
+        padding: 25px 30px;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #495057;
+    }
+
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: #6c757d;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .btn-close:hover {
+        background: #f8f9fa;
+        color: #495057;
+    }
+
+    .modal-body {
+        padding: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+        margin-top: 25px;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+        background: #c82333;
+        transform: translateY(-2px);
+    }
+
+    .btn-danger:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .alert {
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .warning-text {
+        color: #dc3545;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .icon {
+        font-style: normal;
+    }
+</style>
+
+@code {
+    private List<MateriaDto> materias = new();
+    private List<PlanDto> planes = new();
+    private MateriaDto currentMateria = new();
+    private MateriaDto? materiaToDelete;
+    
+    private bool isLoading = true;
+    private bool showDialog = false;
+    private bool showConfirmDialog = false;
+    private bool isEditMode = false;
+    private bool isSaving = false;
+    private bool isDeleting = false;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var isAuthenticated = await AuthService.IsAuthenticatedAsync();
+        if (!isAuthenticated)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        isLoading = true;
+        try
+        {
+            var materiasTask = MateriaService.GetAllAsync();
+            var planesTask = PlanService.GetAllAsync();
+            
+            await Task.WhenAll(materiasTask, planesTask);
+            
+            materias = (await materiasTask).ToList();
+            planes = (await planesTask).ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar datos: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private string GetPlanNombre(int idPlan)
+    {
+        var plan = planes.FirstOrDefault(p => p.Id == idPlan);
+        return plan?.Descripcion ?? "-";
+    }
+
+    private void OpenCreateDialog()
+    {
+        isEditMode = false;
+        currentMateria = new MateriaDto();
+        errorMessage = string.Empty;
+        showDialog = true;
+    }
+
+    private void OpenEditDialog(MateriaDto materia)
+    {
+        isEditMode = true;
+        currentMateria = new MateriaDto
+        {
+            Id = materia.Id,
+            Descripcion = materia.Descripcion,
+            HorasSemanales = materia.HorasSemanales,
+            HorasTotales = materia.HorasTotales,
+            IdPlan = materia.IdPlan
+        };
+        errorMessage = string.Empty;
+        showDialog = true;
+    }
+
+    private void CloseDialog()
+    {
+        showDialog = false;
+        errorMessage = string.Empty;
+    }
+
+    private async Task HandleSave()
+    {
+        if (string.IsNullOrWhiteSpace(currentMateria.Descripcion))
+        {
+            errorMessage = "La descripción es obligatoria";
+            return;
+        }
+
+        if (currentMateria.IdPlan <= 0)
+        {
+            errorMessage = "Debe seleccionar un plan";
+            return;
+        }
+
+        if (currentMateria.HorasSemanales <= 0)
+        {
+            errorMessage = "Las horas semanales deben ser mayores a 0";
+            return;
+        }
+
+        if (currentMateria.HorasTotales <= 0)
+        {
+            errorMessage = "Las horas totales deben ser mayores a 0";
+            return;
+        }
+
+        isSaving = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            bool success;
+            if (isEditMode)
+            {
+                success = await MateriaService.UpdateAsync(currentMateria);
+            }
+            else
+            {
+                success = await MateriaService.CreateAsync(currentMateria);
+            }
+
+            if (success)
+            {
+                await LoadData();
+                CloseDialog();
+            }
+            else
+            {
+                errorMessage = "Error al guardar la materia";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isSaving = false;
+        }
+    }
+
+    private void DeleteMateria(MateriaDto materia)
+    {
+        materiaToDelete = materia;
+        showConfirmDialog = true;
+    }
+
+    private void CloseConfirmDialog()
+    {
+        showConfirmDialog = false;
+        materiaToDelete = null;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        if (materiaToDelete == null) return;
+
+        isDeleting = true;
+        try
+        {
+            var success = await MateriaService.DeleteAsync(materiaToDelete.Id);
+            if (success)
+            {
+                await LoadData();
+                CloseConfirmDialog();
+            }
+            else
+            {
+                errorMessage = "Error al eliminar la materia";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/dashboard");
+    }
+}

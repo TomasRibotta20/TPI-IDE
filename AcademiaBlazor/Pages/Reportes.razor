@@ -1,0 +1,163 @@
+@page "/reportes"
+@inject NavigationManager navigationManager
+
+<div class="page-header">
+    <button class="btn-back" @onclick="GoBack">
+        Volver al Dashboard
+    </button>
+    <h1>Reportes del Sistema</h1>
+</div>
+
+<div class="reportes-grid">
+    <div class="reporte-card" @onclick='() => navigationManager.NavigateTo("/reportes/cursos")'>
+        <div class="reporte-icon">CR</div>
+        <h3>Reporte de Cursos</h3>
+        <p>Análisis completo de cursos, inscripciones y cupos disponibles</p>
+        <div class="reporte-stats">
+            <span>Distribución de ocupación</span>
+            <span>Cursos disponibles vs completos</span>
+            <span>Total de inscriptos</span>
+        </div>
+    </div>
+
+    <div class="reporte-card" @onclick='() => navigationManager.NavigateTo("/reportes/planes")'>
+        <div class="reporte-icon">PL</div>
+        <h3>Reporte de Planes</h3>
+        <p>Desglose de planes de estudio por especialidad</p>
+        <div class="reporte-stats">
+            <span>Vista por especialidad</span>
+            <span>Comisiones y cursos activos</span>
+            <span>Capacidad total</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+    }
+
+    .btn-back {
+        position: absolute;
+        left: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-back:hover {
+        background: white;
+        color: #667eea;
+    }
+
+    .page-header h1 {
+        margin: 0;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .reportes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        padding: 60px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .reporte-card {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+    }
+
+    .reporte-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+    }
+
+    .reporte-icon {
+        font-size: 60px;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .reporte-card h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .reporte-card p {
+        color: #6c757d;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .reporte-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 14px;
+        color: #495057;
+    }
+
+    .reporte-stats span {
+        padding-left: 25px;
+        position: relative;
+    }
+
+    .reporte-stats span::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #48bb78;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    @@media (max-width: 768px) {
+        .btn-back {
+            position: static;
+            transform: none;
+            margin-bottom: 20px;
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+        }
+
+        .reportes-grid {
+            grid-template-columns: 1fr;
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+@code {
+    private void GoBack()
+    {
+        navigationManager.NavigateTo("/dashboard");
+    }
+}

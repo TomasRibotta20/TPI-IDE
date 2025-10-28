@@ -1,0 +1,147 @@
+using Application.Services;
+using DTOs;
+using Data;
+
+namespace AcademiaAPI
+{
+    public static class AuthEndpoints
+    {
+        public static void MapAuthEndpoints(this WebApplication app)
+        {
+            var authService = new AuthService(app.Configuration);
+
+            app.MapPost("/auth/login", async (LoginRequest request) =>
+            {
+                try
+                {
+                    app.Logger.LogInformation($"Login attempt for username: {request.Username}");
+                    
+                    var response = await authService.LoginAsync(request);
+                    if (response != null)
+                    {
+                        app.Logger.LogInformation($"Login successful for user: {request.Username}");
+                        return Results.Ok(response);
+                    }
+                    else
+                    {
+                        app.Logger.LogWarning($"Login failed for user: {request.Username} - Invalid credentials");
+                        
+                        using var context = new AcademiaContext();
+                        var usuarioRepo = new UsuarioRepository(context);
+                        var user = await usuarioRepo.GetByUsernameAsync(request.Username);
+                        if (user != null)
+                        {
+                            app.Logger.LogWarning($"User {request.Username} exists but password validation failed");
+                            
+
+                            bool passwordCheck = user.ValidatePassword(request.Password);
+                            app.Logger.LogWarning($"Password validation result: {passwordCheck}");
+                        }
+                        else
+                        {
+                            app.Logger.LogWarning($"User {request.Username} does not exist in database");
+                        }
+                        
+                        return Results.Unauthorized();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    app.Logger.LogError(ex, $"Error during login for user: {request.Username}");
+                    return Results.BadRequest($"Error en el login: {ex.Message}");
+                }
+            })
+            .WithName("Login")
+            .WithTags("Authentication")
+            .WithOpenApi();
+
+            app.MapPost("/auth/register", async (RegisterRequestDto request) =>
+            {
+                try
+                {
+                    app.Logger.LogInformation($"Register attempt for username: {request.UsuarioNombre}");
+                    
+                    var response = await authService.RegisterAsync(request);
+                    
+                    if (response.Success)
+                    {
+                        app.Logger.LogInformation($"Registration successful for user: {request.UsuarioNombre}");
+                        return Results.Ok(response);
+                    }
+                    else
+                    {
+                        app.Logger.LogWarning($"Registration failed: {response.Message}");
+                        return Results.BadRequest(response);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    app.Logger.LogError(ex, $"Error during registration for user: {request.UsuarioNombre}");
+                    return Results.BadRequest(new RegisterResponseDto
+                    {
+                        Success = false,
+                        Message = $"Error al registrar: {ex.Message}"
+                    });
+                }
+            })
+            .WithName("Register")
+            .WithTags("Authentication")
+            .WithOpenApi();
+
+            app.MapPost("/auth/validate", (ValidateTokenRequest request) =>
+            {
+                try
+                {
+                    var isValid = authService.ValidateToken(request.Token);
+                    return isValid ? Results.Ok(new { Valid = true }) : Results.Unauthorized();
+                }
+                catch (Exception ex)
+                {
+                    app.Logger.LogError(ex, "Error validating token");
+                    return Results.BadRequest($"Error validating token: {ex.Message}");
+                }
+            })
+            .WithName("ValidateToken")
+            .WithTags("Authentication")
+            .WithOpenApi();
+            
+      
+            if (app.Environment.IsDevelopment())
+            {
+                app.MapGet("/auth/check-admin", async () => 
+                {
+                    try 
+                    {
+                        using var context = new AcademiaContext();
+                        var usuarioRepo = new UsuarioRepository(context);
+                        var adminUser = await usuarioRepo.GetByUsernameAsync("admin");
+                        
+                        if (adminUser == null)
+                        {
+                            return Results.NotFound("Admin user not found in database");
+                        }
+                        
+                        bool canValidate = adminUser.ValidatePassword("admin123");
+                        
+                        return Results.Ok(new 
+                        {
+                            exists = true,
+                            username = adminUser.UsuarioNombre,
+                            email = adminUser.Email,
+                            canValidateWithDefaultPassword = canValidate,
+                            passwordHashLength = adminUser.PasswordHash?.Length ?? 0,
+                            saltLength = adminUser.Salt?.Length ?? 0
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        return Results.Problem($"Error checking admin user: {ex.Message}");
+                    }
+                })
+                .WithName("CheckAdminUser")
+                .WithTags("Debugging")
+                .WithOpenApi();
+            }
+        }
+    }
+}

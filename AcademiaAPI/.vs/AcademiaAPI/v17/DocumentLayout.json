@@ -1,0 +1,1612 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoMisCursos.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\academiaapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:academiaapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\usuarioendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:usuarioendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\planendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:planendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\personasendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:personasendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\materiaendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:materiaendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\inscripcionesendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:inscripcionesendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\especialidadendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:especialidadendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\docentecursoendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:docentecursoendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\cursosendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:cursosendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\comisionesendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:comisionesendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|d:\\documents\\desktop\\entregafinal\\tpi\\academiaapi\\authendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7C833C5-B49F-4AA0-8858-95693B757B60}|AcademiaAPI.csproj|solutionrelative:authendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Plan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Persona.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\ModulosUsuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Modulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Materia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Especialidad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\DocenteCurso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Curso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Comision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\AlumnoCurso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\UsuarioRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PlanRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PersonaRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModulosUsuariosRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModuloRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\MateriaRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\EspecialidadRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\DocenteCursoRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\CursoRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ComisionRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AlumnoCursoRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AcademiaContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\UsuarioService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PlanService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PersonaService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloUsuarioService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\MateriaService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\InscripcionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\EspecialidadService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\DocenteCursoService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\CursoService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ComisionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\AuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\UsuarioApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PlanApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PersonaApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosUsuariosApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\MateriaApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\Interfaces.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\InscripcionApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\IAuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\EspecialidadApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\DocenteCursoApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\CursoApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ComisionApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\BaseApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthServiceProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthApiClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Auth.WindowsForms\\WindowsFormsAuthService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\UsuarioService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ProfesorService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PlanService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PdfService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\MateriaService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\InscripcionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\EspecialidadService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\DocenteCursoService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CustomAuthenticationStateProvider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CursoService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ComisionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AuthenticationService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Weather.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Usuarios.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Reportes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReportePlanes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReporteCursos.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AlumnoService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorMisCursos.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorDashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorCargarNotas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Planes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Materias.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Inscripciones.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Especialidades.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\DocentesCursos.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Cursos.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Counter.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Comisiones.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoInscripcion.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoDashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Models\\LoginRequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\NavMenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\MainLayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\_Imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\App.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AcademiaAPI.http",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\AcademiaAPI.http",
+              "RelativeDocumentMoniker": "AcademiaAPI.http",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\AcademiaAPI.http",
+              "RelativeToolTip": "AcademiaAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-10-28T00:14:12.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Usuario.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Usuario.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Usuario.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Usuario.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAswA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:45.776Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Plan.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Plan.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Plan.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Plan.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Plan.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:42.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Persona.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Persona.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Persona.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Persona.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Persona.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:35.598Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ModulosUsuarios.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\ModulosUsuarios.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\ModulosUsuarios.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\ModulosUsuarios.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\ModulosUsuarios.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:31.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AlumnoMisCursos.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoMisCursos.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoMisCursos.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoMisCursos.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoMisCursos.razor",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGAAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:47:50.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Modulo.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Modulo.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Modulo.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Modulo.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Modulo.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:26.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Materia.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Materia.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Materia.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Materia.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Materia.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:24.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Especialidad.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Especialidad.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Especialidad.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Especialidad.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Especialidad.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAmwAcAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:12:07.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DocenteCurso.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\DocenteCurso.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\DocenteCurso.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\DocenteCurso.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\DocenteCurso.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAiwBYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:11:55.96Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Curso.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Curso.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Curso.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Curso.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Curso.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAUwCgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:11:28.943Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Comision.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Comision.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Comision.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Comision.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\Comision.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:11:23.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AlumnoCurso.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\AlumnoCurso.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\AlumnoCurso.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\AlumnoCurso.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Domain.Model\\AlumnoCurso.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:11:18.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "UsuarioRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\UsuarioRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\UsuarioRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\UsuarioRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\UsuarioRepository.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:11:13.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "PlanRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PlanRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PlanRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PlanRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PlanRepository.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAmwDMAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:10:38.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "PersonaRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PersonaRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PersonaRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PersonaRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\PersonaRepository.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:10:36.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ModulosUsuariosRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModulosUsuariosRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModulosUsuariosRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModulosUsuariosRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModulosUsuariosRepository.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:10:34.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ModuloRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModuloRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModuloRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModuloRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ModuloRepository.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:10:31.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "MateriaRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\MateriaRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\MateriaRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\MateriaRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\MateriaRepository.cs",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAuwJ4AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:08:53.186Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "EspecialidadRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\EspecialidadRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\EspecialidadRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\EspecialidadRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\EspecialidadRepository.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAAwBMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:08:40.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DocenteCursoRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\DocenteCursoRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\DocenteCursoRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\DocenteCursoRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\DocenteCursoRepository.cs",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:08:12.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CursoRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\CursoRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\CursoRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\CursoRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\CursoRepository.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:08:10.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ComisionRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ComisionRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ComisionRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ComisionRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\ComisionRepository.cs",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:08:06.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AlumnoCursoRepository.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AlumnoCursoRepository.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AlumnoCursoRepository.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AlumnoCursoRepository.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AlumnoCursoRepository.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:08:03.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AcademiaContext.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AcademiaContext.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AcademiaContext.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AcademiaContext.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Data\\AcademiaContext.cs",
+              "ViewState": "AgIAANcAAAAAAAAAAAAqwFQAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:07:49.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\UsuarioService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\UsuarioService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\UsuarioService.cs",
+              "ViewState": "AgIAANQBAAAAAAAAAAAUwKQBAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:06:48.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "PlanService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PlanService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PlanService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PlanService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PlanService.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAkwBAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:06:35.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "PersonaService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PersonaService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PersonaService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PersonaService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\PersonaService.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:05:10.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ModuloUsuarioService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloUsuarioService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloUsuarioService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloUsuarioService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloUsuarioService.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:05:07.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ModuloService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ModuloService.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:05:04.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "MateriaService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\MateriaService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\MateriaService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\MateriaService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\MateriaService.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:04:18.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "InscripcionService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\InscripcionService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\InscripcionService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\InscripcionService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\InscripcionService.cs",
+              "ViewState": "AgIAANwAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:04:13.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "EspecialidadService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\EspecialidadService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\EspecialidadService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\EspecialidadService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\EspecialidadService.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAUwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:03:22.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "DocenteCursoService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\DocenteCursoService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\DocenteCursoService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\DocenteCursoService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\DocenteCursoService.cs",
+              "ViewState": "AgIAANUAAAAAAAAAAAAswKAAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:02:07.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "CursoService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\CursoService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\CursoService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\CursoService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\CursoService.cs",
+              "ViewState": "AgIAAPUAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:02:01.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "ComisionService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ComisionService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ComisionService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ComisionService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\ComisionService.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAA8wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:01:57.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\AuthService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\AuthService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\Aplication.Services\\AuthService.cs",
+              "ViewState": "AgIAABMBAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:01:10.876Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "UsuarioApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\UsuarioApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\UsuarioApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\UsuarioApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\UsuarioApiClient.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAAwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:00:21.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "PlanApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PlanApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PlanApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PlanApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PlanApiClient.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:00:17.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "PersonaApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PersonaApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PersonaApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PersonaApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\PersonaApiClient.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAcwGwAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:59:31.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ModulosUsuariosApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosUsuariosApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosUsuariosApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosUsuariosApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosUsuariosApiClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:59:23.458Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "ModulosApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ModulosApiClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:59:15.955Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "MateriaApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\MateriaApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\MateriaApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\MateriaApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\MateriaApiClient.cs",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAwwDAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:58:56.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Interfaces.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\Interfaces.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\Interfaces.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\Interfaces.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\Interfaces.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:58:53.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "InscripcionApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\InscripcionApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\InscripcionApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\InscripcionApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\InscripcionApiClient.cs",
+              "ViewState": "AgIAAP8AAAAAAAAAAAAUwKsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:57:18.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\IAuthService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\IAuthService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\IAuthService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:57:14.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "EspecialidadApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\EspecialidadApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\EspecialidadApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\EspecialidadApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\EspecialidadApiClient.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:57:11.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "DocenteCursoApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\DocenteCursoApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\DocenteCursoApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\DocenteCursoApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\DocenteCursoApiClient.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:57:08.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "CursoApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\CursoApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\CursoApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\CursoApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\CursoApiClient.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:57:04.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "ComisionApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ComisionApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ComisionApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ComisionApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\ComisionApiClient.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:57:01.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "BaseApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\BaseApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\BaseApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\BaseApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\BaseApiClient.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAcwIMAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:56:22.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "AuthServiceProvider.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthServiceProvider.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthServiceProvider.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthServiceProvider.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthServiceProvider.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:56:17.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "AuthApiClient.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthApiClient.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthApiClient.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthApiClient.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Clients\\AuthApiClient.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAowGAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:55:53.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "WindowsFormsAuthService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Auth.WindowsForms\\WindowsFormsAuthService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Auth.WindowsForms\\WindowsFormsAuthService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Auth.WindowsForms\\WindowsFormsAuthService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\API.Auth.WindowsForms\\WindowsFormsAuthService.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:55:47.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\UsuarioService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\UsuarioService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\UsuarioService.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAEYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:55:16.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "ProfesorService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ProfesorService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ProfesorService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ProfesorService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ProfesorService.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:55:09.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "PlanService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PlanService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PlanService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PlanService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PlanService.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:54:56.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "PdfService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PdfService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PdfService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PdfService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\PdfService.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:54:44.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "MateriaService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\MateriaService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\MateriaService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\MateriaService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\MateriaService.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAAAEIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:54:30.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "InscripcionService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\InscripcionService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\InscripcionService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\InscripcionService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\InscripcionService.cs",
+              "ViewState": "AgIAALgAAAAAAAAAAAAAAFcAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:54:12.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "EspecialidadService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\EspecialidadService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\EspecialidadService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\EspecialidadService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\EspecialidadService.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:54:09.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "DocenteCursoService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\DocenteCursoService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\DocenteCursoService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\DocenteCursoService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\DocenteCursoService.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAAAEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:53:59.378Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "CustomAuthenticationStateProvider.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CustomAuthenticationStateProvider.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CustomAuthenticationStateProvider.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CustomAuthenticationStateProvider.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CustomAuthenticationStateProvider.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:53:57.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "CursoService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CursoService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CursoService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CursoService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\CursoService.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:53:54.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "ComisionService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ComisionService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ComisionService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ComisionService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\ComisionService.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:53:51.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AuthenticationService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AuthenticationService.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:53:49.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Weather.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Weather.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Weather.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Weather.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Weather.razor",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:53:40.48Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "Usuarios.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Usuarios.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Usuarios.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Usuarios.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Usuarios.razor",
+              "ViewState": "AgIAAFIEAAAAAAAAAAAAAM8DAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:52:50.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "Reportes.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Reportes.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Reportes.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Reportes.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Reportes.razor",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:52:45.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "ReportePlanes.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReportePlanes.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReportePlanes.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReportePlanes.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReportePlanes.razor",
+              "ViewState": "AgIAAPsBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:52:34.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "ReporteCursos.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReporteCursos.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReporteCursos.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReporteCursos.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ReporteCursos.razor",
+              "ViewState": "AgIAAJYDAAAAAAAAAAAAAN8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:51:48.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "AlumnoService.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AlumnoService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AlumnoService.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AlumnoService.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Services\\AlumnoService.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:46:58.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "ProfesorMisCursos.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorMisCursos.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorMisCursos.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorMisCursos.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorMisCursos.razor",
+              "ViewState": "AgIAAM4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:51:39.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "ProfesorDashboard.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorDashboard.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorDashboard.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorDashboard.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorDashboard.razor",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:51:31.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "ProfesorCargarNotas.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorCargarNotas.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorCargarNotas.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorCargarNotas.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\ProfesorCargarNotas.razor",
+              "ViewState": "AgIAAC0DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:51:13.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "Planes.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Planes.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Planes.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Planes.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Planes.razor",
+              "ViewState": "AgIAAMcCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:50:58.147Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "Materias.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Materias.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Materias.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Materias.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Materias.razor",
+              "ViewState": "AgIAAPECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:50:38.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "Login.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Login.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Login.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Login.razor",
+              "ViewState": "AgIAAK0CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:50:05.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "Inscripciones.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Inscripciones.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Inscripciones.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Inscripciones.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Inscripciones.razor",
+              "ViewState": "AgIAAG0DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:49:46.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "Home.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Home.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Home.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:49:44.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "Especialidades.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Especialidades.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Especialidades.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Especialidades.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Especialidades.razor",
+              "ViewState": "AgIAAPUBAAAAAAAAAAAAAGsBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:49:24.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "DocentesCursos.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\DocentesCursos.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\DocentesCursos.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\DocentesCursos.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\DocentesCursos.razor",
+              "ViewState": "AgIAAKgDAAAAAAAAAAAAAHEBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:48:44.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "Dashboard.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Dashboard.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Dashboard.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Dashboard.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Dashboard.razor",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:48:35.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 94,
+              "Title": "Cursos.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Cursos.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Cursos.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Cursos.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Cursos.razor",
+              "ViewState": "AgIAALUCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:48:22.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 95,
+              "Title": "Counter.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Counter.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Counter.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Counter.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Counter.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:48:20.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 96,
+              "Title": "Comisiones.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Comisiones.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Comisiones.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Comisiones.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\Comisiones.razor",
+              "ViewState": "AgIAANMCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:48:04.958Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 97,
+              "Title": "AlumnoInscripcion.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoInscripcion.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoInscripcion.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoInscripcion.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoInscripcion.razor",
+              "ViewState": "AgIAAHIDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:47:22.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 98,
+              "Title": "AlumnoDashboard.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoDashboard.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoDashboard.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoDashboard.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Pages\\AlumnoDashboard.razor",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:47:10.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 99,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Models\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Models\\LoginRequest.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Models\\LoginRequest.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Models\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:47:05.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 100,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\NavMenu.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\NavMenu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:47:03.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 101,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\MainLayout.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:47:02.638Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 102,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\_Imports.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\_Imports.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\_Imports.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:46:52.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 103,
+              "Title": "App.razor",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\App.razor",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\App.razor",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\App.razor",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-27T23:46:50.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 104,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Program.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\Tarea\\UTN\\3er_anio\\IDE\\TPI(Entrega_2)\\AcademiaBlazor\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:46:37.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UsuarioEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\UsuarioEndpoints.cs",
+              "RelativeDocumentMoniker": "UsuarioEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\UsuarioEndpoints.cs",
+              "RelativeToolTip": "UsuarioEndpoints.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAgwFIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:45:58.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:45:51.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlanEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\PlanEndpoints.cs",
+              "RelativeDocumentMoniker": "PlanEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\PlanEndpoints.cs",
+              "RelativeToolTip": "PlanEndpoints.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:45:48.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PersonasEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\PersonasEndpoints.cs",
+              "RelativeDocumentMoniker": "PersonasEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\PersonasEndpoints.cs",
+              "RelativeToolTip": "PersonasEndpoints.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:45:41.298Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MateriaEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\MateriaEndpoints.cs",
+              "RelativeDocumentMoniker": "MateriaEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\MateriaEndpoints.cs",
+              "RelativeToolTip": "MateriaEndpoints.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAgwFkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:44:25.863Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "InscripcionesEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\InscripcionesEndpoints.cs",
+              "RelativeDocumentMoniker": "InscripcionesEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\InscripcionesEndpoints.cs",
+              "RelativeToolTip": "InscripcionesEndpoints.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:44:15.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EspecialidadEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\EspecialidadEndpoints.cs",
+              "RelativeDocumentMoniker": "EspecialidadEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\EspecialidadEndpoints.cs",
+              "RelativeToolTip": "EspecialidadEndpoints.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:44:12.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DocenteCursoEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\DocenteCursoEndpoints.cs",
+              "RelativeDocumentMoniker": "DocenteCursoEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\DocenteCursoEndpoints.cs",
+              "RelativeToolTip": "DocenteCursoEndpoints.cs",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:44:06.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CursosEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\CursosEndpoints.cs",
+              "RelativeDocumentMoniker": "CursosEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\CursosEndpoints.cs",
+              "RelativeToolTip": "CursosEndpoints.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:43:57.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ComisionesEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\ComisionesEndpoints.cs",
+              "RelativeDocumentMoniker": "ComisionesEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\ComisionesEndpoints.cs",
+              "RelativeToolTip": "ComisionesEndpoints.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAgwC4AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:43:35.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AuthEndpoints.cs",
+              "DocumentMoniker": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\AuthEndpoints.cs",
+              "RelativeDocumentMoniker": "AuthEndpoints.cs",
+              "ToolTip": "D:\\Documents\\Desktop\\EntregaFinal\\TPI\\AcademiaAPI\\AuthEndpoints.cs",
+              "RelativeToolTip": "AuthEndpoints.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAgwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T23:42:57.502Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
